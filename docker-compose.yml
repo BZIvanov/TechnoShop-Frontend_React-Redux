@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  app-database:
+    image: postgres
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  app-database-admin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+
+  app-movies:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: devenv
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - app-database

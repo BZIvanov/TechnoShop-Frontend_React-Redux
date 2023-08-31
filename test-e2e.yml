@@ -1,0 +1,4 @@
+services:
+  app-movies:
+    build:
+      target: teste2eenv
