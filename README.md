@@ -71,7 +71,7 @@ npm run some-command-here
 - _docker:dev-stop_ - Stop the docker containers
 - _docker:prod-start_ - Start the docker containers in production mode. Additional _production.yml_ file is used to overrirde the stage _devenv_ with _prodenv_. In the Dockerfile for _prodenv_ stage we will then set NODE_ENV to production
 - _docker:prod-stop_ - Stop the docker containers
-- _docker:test_ - Run the unit tests container. Separate _docker-compose.test.yml_ file is used for the unit tests, because we don't want to also start the database and pgadmin containers. All database operations are mocked in the tests
+- _docker:test_ - Run the unit tests container. Run this command outside the container terminal, use VS code terminal for example. Separate _docker-compose.test.yml_ file is used for the unit tests, because we don't want to also start the database and pgadmin containers. All database operations are mocked in the tests
 - _docker:test:e2e_ - Run the e2e tests containers. Additional _test-e2e.yml_ file is used for the e2e tests to override the stage in _docker-compose.yml_ file. Additional flag _--exit-code-from_ is applied to close stop the containers are the tests are finished
 
 ## Rate limiting

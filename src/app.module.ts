@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import envConfig from './config/env-config/env-config';
 import { configurationValidationSchema } from './config/env-config/configuration-validation-schema';
 import { CustomThrottlerGuard } from './guards/custom-throttler.guard';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { MoviesModule } from './modules/movies/movies.module';
 
 @Module({
@@ -35,6 +37,8 @@ import { MoviesModule } from './modules/movies/movies.module';
         };
       },
     }),
+    UsersModule,
+    AuthModule,
     MoviesModule,
   ],
   providers: [
