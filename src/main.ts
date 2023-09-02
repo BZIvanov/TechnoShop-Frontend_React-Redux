@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import { createClient } from 'redis';
+import RedisStore from 'connect-redis';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import { ValidationPipe } from '@nestjs/common';
@@ -11,8 +13,21 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
+  const redistHost = configService.get<string>('redis.host');
+  const redistPort = configService.get<number>('redis.port');
+  const redisClient = createClient({
+    url: `redis://${redistHost}:${redistPort}`,
+  });
+  redisClient.connect().catch(console.error);
+
+  const redisStore = new RedisStore({
+    client: redisClient,
+    prefix: 'myapp:',
+  });
+
   app.use(
     session({
+      store: redisStore,
       secret: configService.get<string>('session.secret'),
       resave: false,
       saveUninitialized: false,
@@ -33,7 +48,7 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
-  const port = configService.get<number>('app.port');
-  await app.listen(port);
+  const appPort = configService.get<number>('app.port');
+  await app.listen(appPort);
 }
 bootstrap();

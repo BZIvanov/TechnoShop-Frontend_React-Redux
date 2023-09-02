@@ -18,6 +18,11 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
 
+  app-redis:
+    image: redis:7.2
+    ports:
+      - 6379:6379
+
   app-movies:
     build:
       context: .
