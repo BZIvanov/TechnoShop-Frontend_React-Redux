@@ -5,6 +5,7 @@ import RedisStore from 'connect-redis';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { Environment } from './constants/environment';
 
@@ -47,6 +48,14 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
+
+  const documentConfig = new DocumentBuilder()
+    .setTitle('Marvelous Movies App API')
+    .setDescription('Movies List')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, documentConfig);
+  SwaggerModule.setup('api', app, document);
 
   const appPort = configService.get<number>('app.port');
   await app.listen(appPort);

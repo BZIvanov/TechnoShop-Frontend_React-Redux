@@ -78,6 +78,10 @@ npm run some-command-here
 
 App wide 'throttle guard' is provided to control request rates. This avoids too many requests from one source in a short time, keeping the app responsive.
 
+## API documentation - Swagger
+
+After starting the application visit http://localhost:3000/api to view the documentation. The `/api` endpoint is specified, when setting up swagger in main.ts file if you want to change it.
+
 ## Additional notes
 
 1. `watchOptions` was added to the file `tsconfig.json` to make the hot reloading working with docker containers. Without it the local files changes are applied to the files in the container, but application still uses the old code.
