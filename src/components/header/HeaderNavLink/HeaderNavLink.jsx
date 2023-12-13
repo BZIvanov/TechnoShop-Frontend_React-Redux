@@ -24,8 +24,7 @@ const HeaderNavLink = ({ toLink, icon, linkText }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: '2px 16px',
-          cursor: 'pointer',
+          marginInline: '16px',
         }}
       >
         {icon}

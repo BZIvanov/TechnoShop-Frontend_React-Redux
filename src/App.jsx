@@ -5,6 +5,7 @@ import AppRoutes from './providers/router/AppRoutes';
 import { useGetCurrentUserQuery } from './providers/store/services/users';
 
 const App = () => {
+  // populate current user info in redux on page reload
   useGetCurrentUserQuery();
 
   return (
