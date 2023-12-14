@@ -9,6 +9,7 @@ import {
   ExitToAppIcon,
   HomeIcon,
   LoginIcon,
+  PersonAddIcon,
 } from '../../mui/Icons';
 import { useSelector } from '../../../providers/store/store';
 import { selectUser } from '../../../providers/store/features/user/userSlice';
@@ -46,11 +47,18 @@ const Header = () => {
                     icon={<ExitToAppIcon />}
                   />
                 ) : (
-                  <HeaderNavLink
-                    toLink='/login'
-                    linkText='Login'
-                    icon={<LoginIcon />}
-                  />
+                  <>
+                    <HeaderNavLink
+                      toLink='/register'
+                      linkText='Register'
+                      icon={<PersonAddIcon />}
+                    />
+                    <HeaderNavLink
+                      toLink='/login'
+                      linkText='Login'
+                      icon={<LoginIcon />}
+                    />
+                  </>
                 )}
               </Box>
             </Box>
