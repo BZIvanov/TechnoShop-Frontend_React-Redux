@@ -3,23 +3,26 @@ import { api } from './api';
 export const usersApi = api.injectEndpoints({
   endpoints: (build) => ({
     register: build.mutation({
-      query: (credentials) => ({
+      query: (data) => ({
         url: '/users/register',
         method: 'POST',
-        body: credentials,
+        body: data,
+        credentials: 'include',
       }),
     }),
     login: build.mutation({
-      query: (credentials) => ({
+      query: (data) => ({
         url: '/users/login',
         method: 'POST',
-        body: credentials,
+        body: data,
+        credentials: 'include',
       }),
     }),
     getCurrentUser: build.query({
       query: () => ({
         url: '/users/current-user',
-        keepUnusedDataFor: 5,
+        method: 'GET',
+        credentials: 'include', // this is needed for the cookies to be set and sent to the backend
       }),
     }),
   }),

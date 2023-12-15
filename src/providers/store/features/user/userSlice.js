@@ -4,6 +4,7 @@ import { usersApi } from '../../services/users';
 
 const initialState = {
   user: null,
+  error: '',
 };
 
 const userSlice = createSlice({
@@ -11,12 +12,22 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(
-      usersApi.endpoints.getCurrentUser.matchFulfilled,
-      (state, action) => {
-        state.user = action.payload;
-      }
-    );
+    builder
+      .addMatcher(
+        usersApi.endpoints.register.matchFulfilled,
+        (state, action) => {
+          state.user = action.payload.user;
+        }
+      )
+      .addMatcher(usersApi.endpoints.login.matchFulfilled, (state, action) => {
+        state.user = action.payload.user;
+      })
+      .addMatcher(
+        usersApi.endpoints.getCurrentUser.matchFulfilled,
+        (state, action) => {
+          state.user = action.payload.user;
+        }
+      );
   },
 });
 
