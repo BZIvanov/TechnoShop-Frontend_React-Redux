@@ -18,6 +18,13 @@ export const usersApi = api.injectEndpoints({
         credentials: 'include',
       }),
     }),
+    logout: build.mutation({
+      query: () => ({
+        url: '/users/logout',
+        method: 'POST',
+        credentials: 'include',
+      }),
+    }),
     getCurrentUser: build.query({
       query: () => ({
         url: '/users/current-user',
@@ -28,5 +35,9 @@ export const usersApi = api.injectEndpoints({
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useGetCurrentUserQuery } =
-  usersApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useGetCurrentUserQuery,
+} = usersApi;

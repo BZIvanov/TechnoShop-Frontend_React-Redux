@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -13,23 +11,15 @@ import { EmailIcon, FaceIcon } from '../../../mui/Icons';
 import { formConfig } from './form-schema';
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
-
-  const [register, { isLoading, isSuccess }] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
 
   const formMethods = useForm(formConfig);
   const { formState, reset } = formMethods;
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = (values) => {
     const { username, email, password } = values;
-    await register({ username, email, password });
+    register({ username, email, password });
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate('/');
-    }
-  }, [navigate, isSuccess]);
 
   return (
     <Box

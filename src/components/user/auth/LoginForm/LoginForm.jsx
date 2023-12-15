@@ -11,7 +11,7 @@ import { EmailIcon } from '../../../mui/Icons';
 import { formConfig } from './form-schema';
 
 const LoginForm = () => {
-  const [login, , { isLoading }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const formMethods = useForm(formConfig);
   const { formState } = formMethods;

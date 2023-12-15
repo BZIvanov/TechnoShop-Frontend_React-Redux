@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
+import { useLogoutMutation } from '../../../providers/store/services/users';
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 import {
   AddBusinessIcon,
@@ -16,6 +17,12 @@ import { selectUser } from '../../../providers/store/features/user/userSlice';
 
 const Header = () => {
   const user = useSelector(selectUser);
+
+  const [logout] = useLogoutMutation();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <>
@@ -42,9 +49,9 @@ const Header = () => {
               <Box sx={{ display: 'flex' }}>
                 {user ? (
                   <HeaderNavLink
-                    toLink='/logout'
                     linkText='Logout'
                     icon={<ExitToAppIcon />}
+                    onClick={handleLogout}
                   />
                 ) : (
                   <>
