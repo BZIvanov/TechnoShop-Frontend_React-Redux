@@ -65,6 +65,7 @@ const ForgotPasswordDialog = ({
               color='secondary'
               type='button'
               onClick={() => handleShowForgotModal(false)}
+              disabled={formState.submitting || isLoading}
             >
               Cancel
             </Button>

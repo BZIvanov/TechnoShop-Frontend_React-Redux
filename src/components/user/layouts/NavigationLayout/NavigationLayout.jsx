@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import SidebarMenu from '../../navigation/SidebarMenu/SidebarMenu';
+
 const NavigationLayout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      <div>Sidebar</div>
+      <SidebarMenu />
 
       <Box sx={{ flexGrow: 1 }}>
         <Outlet />

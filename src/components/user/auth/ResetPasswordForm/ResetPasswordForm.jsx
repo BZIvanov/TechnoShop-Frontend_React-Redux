@@ -67,7 +67,7 @@ const ResetPasswordForm = () => {
               color='secondary'
               type='button'
               onClick={() => reset()}
-              disabled={formState.submitting}
+              disabled={formState.submitting || isLoading}
             >
               Reset
             </Button>

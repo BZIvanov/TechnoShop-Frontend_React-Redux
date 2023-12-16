@@ -6,6 +6,7 @@ import RegisterForm from '../../components/user/auth/RegisterForm/RegisterForm';
 import LoginForm from '../../components/user/auth/LoginForm/LoginForm';
 import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
 import NavigationLayout from '../../components/user/layouts/NavigationLayout/NavigationLayout';
+import OrdersList from '../../components/order/OrdersList/OrdersList';
 
 const AppRoutes = () => {
   return (
@@ -43,9 +44,10 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       >
-        <Route path='orders' element={<div>Order</div>} />
+        <Route path='orders' element={<OrdersList />} />
+        <Route path='wishlist' element={<div>Wishlist</div>} />
+        <Route path='password' element={<div>Password Update</div>} />
       </Route>
-      <Route path='/shop' element={<div>Shop</div>} />
     </Routes>
   );
 };

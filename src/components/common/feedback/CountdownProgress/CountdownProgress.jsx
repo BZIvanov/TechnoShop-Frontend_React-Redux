@@ -25,7 +25,7 @@ const CountdownProgress = ({ redirectTo, seconds = 2 }) => {
 
   useEffect(() => {
     if (progress === 0) {
-      return navigate(redirectTo);
+      navigate(redirectTo);
     }
   }, [navigate, redirectTo, progress]);
 

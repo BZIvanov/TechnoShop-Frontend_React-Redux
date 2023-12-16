@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { useSelector } from '../../../../providers/store/store';
+import { selectUser } from '../../../../providers/store/features/user/userSlice';
 import CountdownProgress from '../../../common/feedback/CountdownProgress/CountdownProgress';
 
 const ProtectedRoute = ({
@@ -9,7 +10,7 @@ const ProtectedRoute = ({
   roleRedirectTo,
   roles,
 }) => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector(selectUser);
 
   if (!user) {
     return <CountdownProgress redirectTo={authRedirectTo} />;
