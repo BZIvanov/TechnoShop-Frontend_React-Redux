@@ -32,6 +32,20 @@ export const usersApi = api.injectEndpoints({
         credentials: 'include', // this is needed for the cookies to be set and sent to the backend
       }),
     }),
+    forgotPassword: build.mutation({
+      query: (data) => ({
+        url: '/users/forgot-password',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    resetPassword: build.mutation({
+      query: (data) => ({
+        url: '/users/reset-password',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -40,4 +54,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useGetCurrentUserQuery,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = usersApi;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -9,8 +10,11 @@ import TextFieldAdapter from '../../../../providers/form/form-fields/TextFieldAd
 import PasswordTextFieldAdapter from '../../../../providers/form/form-fields/PasswordTextFieldAdapter/PasswordTextFieldAdapter';
 import { EmailIcon } from '../../../mui/Icons';
 import { formConfig } from './form-schema';
+import ForgotPasswordDialog from '../ForgotPasswordDialog/ForgotPasswordDialog';
 
 const LoginForm = () => {
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+
   const [login, { isLoading }] = useLoginMutation();
 
   const formMethods = useForm(formConfig);
@@ -18,6 +22,10 @@ const LoginForm = () => {
 
   const handleFormSubmit = (values) => {
     login(values);
+  };
+
+  const handleShowForgotModal = (shouldShow) => {
+    setShowForgotPasswordModal(shouldShow);
   };
 
   return (
@@ -53,6 +61,17 @@ const LoginForm = () => {
             </Button>
           </Box>
         </FormProvider>
+
+        <Box sx={{ marginTop: '30px', textAlign: 'right' }}>
+          <Button color='warning' onClick={() => handleShowForgotModal(true)}>
+            Forgot Password?
+          </Button>
+        </Box>
+
+        <ForgotPasswordDialog
+          showForgotPasswordModal={showForgotPasswordModal}
+          handleShowForgotModal={handleShowForgotModal}
+        />
       </Box>
     </Box>
   );
