@@ -2,7 +2,13 @@ import MenuList from '@mui/material/MenuList';
 
 import { useSelector } from '../../../../providers/store/store';
 import { selectUser } from '../../../../providers/store/features/user/userSlice';
-import { DashboardIcon, ListAltIcon, PasswordIcon } from '../../../mui/Icons';
+import {
+  AutoAwesomeMosaicIcon,
+  CategoryIcon,
+  DashboardIcon,
+  ListAltIcon,
+  PasswordIcon,
+} from '../../../mui/Icons';
 import SidebarMenuLink from '../SidebarMenuLink/SidebarMenuLink';
 
 const userLinks = [
@@ -28,6 +34,16 @@ const adminLinks = [
     toLink: 'orders',
     icon: <DashboardIcon fontSize='small' />,
     linkText: 'Orders',
+  },
+  {
+    toLink: 'category',
+    icon: <CategoryIcon fontSize='small' />,
+    linkText: 'Manage categories',
+  },
+  {
+    toLink: 'subcategory',
+    icon: <AutoAwesomeMosaicIcon fontSize='small' />,
+    linkText: 'Manage subcategories',
   },
   {
     toLink: 'password',

@@ -1,5 +1,7 @@
 import {
   AddBusiness,
+  AutoAwesomeMosaic,
+  Category,
   Email,
   ExitToApp,
   Face,
@@ -14,6 +16,10 @@ import {
 } from '@mui/icons-material';
 
 export const AddBusinessIcon = (props) => <AddBusiness {...props} />;
+export const AutoAwesomeMosaicIcon = (props) => (
+  <AutoAwesomeMosaic {...props} />
+);
+export const CategoryIcon = (props) => <Category {...props} />;
 export const EmailIcon = (props) => <Email {...props} />;
 export const ExitToAppIcon = (props) => <ExitToApp {...props} />;
 export const FaceIcon = (props) => <Face {...props} />;
