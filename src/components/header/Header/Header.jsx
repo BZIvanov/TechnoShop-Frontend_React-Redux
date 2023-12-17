@@ -7,6 +7,7 @@ import { useLogoutMutation } from '../../../providers/store/services/users';
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 import {
   ExitToAppIcon,
+  DashboardIcon,
   HomeIcon,
   LoginIcon,
   PersonAddIcon,
@@ -42,11 +43,20 @@ const Header = () => {
 
               <Box sx={{ display: 'flex' }}>
                 {user ? (
-                  <HeaderNavLink
-                    linkText='Logout'
-                    icon={<ExitToAppIcon />}
-                    onClick={handleLogout}
-                  />
+                  <>
+                    <HeaderNavLink
+                      toLink={`/${
+                        user.role === 'admin' ? 'admin' : 'user'
+                      }/orders`}
+                      linkText='Orders'
+                      icon={<DashboardIcon />}
+                    />
+                    <HeaderNavLink
+                      linkText='Logout'
+                      icon={<ExitToAppIcon />}
+                      onClick={handleLogout}
+                    />
+                  </>
                 ) : (
                   <>
                     <HeaderNavLink

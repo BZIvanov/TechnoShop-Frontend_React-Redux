@@ -7,6 +7,7 @@ import LoginForm from '../../components/user/auth/LoginForm/LoginForm';
 import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
 import NavigationLayout from '../../components/user/layouts/NavigationLayout/NavigationLayout';
 import OrdersList from '../../components/order/OrdersList/OrdersList';
+import PasswordUpdateForm from '../../components/user/auth/PasswordUpdateForm/PasswordUpdateForm';
 
 const AppRoutes = () => {
   return (
@@ -46,7 +47,21 @@ const AppRoutes = () => {
       >
         <Route path='orders' element={<OrdersList />} />
         <Route path='wishlist' element={<div>Wishlist</div>} />
-        <Route path='password' element={<div>Password Update</div>} />
+        <Route path='password' element={<PasswordUpdateForm />} />
+      </Route>
+      <Route
+        path='/admin'
+        element={
+          <ProtectedRoute
+            authRedirectTo='/login'
+            roleRedirectTo='/'
+            roles={['admin']}
+          >
+            <NavigationLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path='orders' element={<OrdersList />} />
       </Route>
     </Routes>
   );

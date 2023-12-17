@@ -46,6 +46,14 @@ export const usersApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    updatePassword: build.mutation({
+      query: (data) => ({
+        url: '/users/update-password',
+        method: 'PATCH',
+        body: data,
+        credentials: 'include',
+      }),
+    }),
   }),
 });
 
@@ -56,4 +64,5 @@ export const {
   useGetCurrentUserQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useUpdatePasswordMutation,
 } = usersApi;
