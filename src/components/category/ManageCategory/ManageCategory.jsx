@@ -30,8 +30,8 @@ const ManageCategory = () => {
   });
   const [filterCategoryText, setFilterCategoryText] = useState('');
 
-  const { data: categories = [] } = useGetAllCategoriesQuery();
-
+  const { data: categories = [], isLoading: isGettingCategories } =
+    useGetAllCategoriesQuery();
   const [createCategory, { isLoading: isCreatingCategory }] =
     useCreateCategoryMutation();
   const [updateCategory, { isLoading: isUpdatingCategory }] =
@@ -39,7 +39,10 @@ const ManageCategory = () => {
   const [deleteCategory, { isLoading: isDeletingCategory }] =
     useDeleteCategoryMutation();
   const isLoading =
-    isCreatingCategory || isUpdatingCategory || isDeletingCategory;
+    isGettingCategories ||
+    isCreatingCategory ||
+    isUpdatingCategory ||
+    isDeletingCategory;
 
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;
@@ -89,7 +92,7 @@ const ManageCategory = () => {
               }}
               disabled={formState.submitting || isLoading}
             >
-              Reset
+              Reset form
             </Button>
             <Button
               sx={{ marginLeft: '5px' }}
@@ -97,7 +100,7 @@ const ManageCategory = () => {
               type='submit'
               disabled={formState.submitting || isLoading}
             >
-              {selectedCategory ? 'Update' : 'Create'}
+              {selectedCategory ? 'Update category' : 'Create category'}
             </Button>
           </Box>
         </FormProvider>
