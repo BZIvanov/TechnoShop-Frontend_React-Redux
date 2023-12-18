@@ -15,6 +15,7 @@ import {
   useUpdateSubcategoryMutation,
   useDeleteSubcategoryMutation,
 } from '../../../providers/store/services/subcategories';
+import { useSelector } from '../../../providers/store/store';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
@@ -31,22 +32,21 @@ const ManageSubcategory = () => {
   });
   const [filterSubcategoryText, setFilterSubcategoryText] = useState('');
 
-  const { data: categories = [], isLoading: isGettingCategories } =
-    useGetAllCategoriesQuery();
-  const { data: subcategories = [], isLoading: isGettingSubcategories } =
-    useGetAllSubcategoriesQuery();
-  const [createSubcategory, { isLoading: isCreatingSubcategory }] =
-    useCreateSubcategoryMutation();
-  const [updateSubcategory, { isLoading: isUpdatingSubcategory }] =
-    useUpdateSubcategoryMutation();
-  const [deleteSubcategory, { isLoading: isDeletingSubcategory }] =
-    useDeleteSubcategoryMutation();
-  const isLoading =
-    isGettingCategories ||
-    isGettingSubcategories ||
-    isCreatingSubcategory ||
-    isUpdatingSubcategory ||
-    isDeletingSubcategory;
+  const { data: categories = [] } = useGetAllCategoriesQuery();
+  const { data: subcategories = [] } = useGetAllSubcategoriesQuery();
+  const [createSubcategory] = useCreateSubcategoryMutation();
+  const [updateSubcategory] = useUpdateSubcategoryMutation();
+  const [deleteSubcategory] = useDeleteSubcategoryMutation();
+
+  const isLoading = useSelector((state) => {
+    const isSomeQueryPending = Object.values(state.api.queries).some(
+      (query) => query.status === 'pending'
+    );
+    const isSomeMutationPending = Object.values(state.api.mutations).some(
+      (mutation) => mutation.status === 'pending'
+    );
+    return isSomeQueryPending || isSomeMutationPending;
+  });
 
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;

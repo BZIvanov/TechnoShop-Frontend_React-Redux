@@ -8,10 +8,14 @@ import FormHelperText from '@mui/material/FormHelperText';
 
 import { useFormContext } from '../../hooks/useFormContext';
 
-const SelectDropdownAdapter = ({ name, label, options, extendedOnChange }) => {
+const SelectDropdownAdapter = ({
+  name,
+  label,
+  isDisabled,
+  options,
+  extendedOnChange,
+}) => {
   const { control } = useFormContext();
-
-  // const loading = useSelector((state) => state.apiCall.loading);
 
   return (
     <Controller
@@ -30,7 +34,7 @@ const SelectDropdownAdapter = ({ name, label, options, extendedOnChange }) => {
             sx={{ width: '100%' }}
             variant='standard'
             error={Boolean(fieldState.error)}
-            // disabled={loading}
+            disabled={isDisabled}
           >
             <InputLabel>{label}</InputLabel>
 
@@ -65,6 +69,7 @@ const SelectDropdownAdapter = ({ name, label, options, extendedOnChange }) => {
 SelectDropdownAdapter.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
+  isDisabled: PropTypes.bool,
   options: PropTypes.array,
   extendedOnChange: PropTypes.func,
 };

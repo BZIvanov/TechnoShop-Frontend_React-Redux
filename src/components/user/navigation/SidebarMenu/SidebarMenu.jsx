@@ -6,6 +6,7 @@ import {
   AutoAwesomeMosaicIcon,
   CategoryIcon,
   DashboardIcon,
+  GradientIcon,
   ListAltIcon,
   PasswordIcon,
 } from '../../../mui/Icons';
@@ -44,6 +45,11 @@ const adminLinks = [
     toLink: 'subcategory',
     icon: <AutoAwesomeMosaicIcon fontSize='small' />,
     linkText: 'Manage subcategories',
+  },
+  {
+    toLink: 'product',
+    icon: <GradientIcon fontSize='small' />,
+    linkText: 'Manage products',
   },
   {
     toLink: 'password',

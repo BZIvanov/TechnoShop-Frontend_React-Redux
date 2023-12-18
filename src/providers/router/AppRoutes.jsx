@@ -10,6 +10,7 @@ import OrdersList from '../../components/order/OrdersList/OrdersList';
 import PasswordUpdateForm from '../../components/user/auth/PasswordUpdateForm/PasswordUpdateForm';
 import ManageCategory from '../../components/category/ManageCategory/ManageCategory';
 import ManageSubcategory from '../../components/subcategory/ManageSubcategory/ManageSubcategory';
+import ManageProduct from '../../components/product/ManageProduct/ManageProduct';
 
 const AppRoutes = () => {
   return (
@@ -66,6 +67,8 @@ const AppRoutes = () => {
         <Route path='orders' element={<OrdersList />} />
         <Route path='category' element={<ManageCategory />} />
         <Route path='subcategory' element={<ManageSubcategory />} />
+        <Route path='product' element={<ManageProduct />} />
+        <Route path='product/:productId' element={<ManageProduct />} />
         <Route path='password' element={<PasswordUpdateForm />} />
       </Route>
     </Routes>

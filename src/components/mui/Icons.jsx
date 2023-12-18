@@ -6,6 +6,7 @@ import {
   ExitToApp,
   Face,
   Dashboard,
+  Gradient,
   Home,
   ListAlt,
   Login,
@@ -24,6 +25,7 @@ export const EmailIcon = (props) => <Email {...props} />;
 export const ExitToAppIcon = (props) => <ExitToApp {...props} />;
 export const FaceIcon = (props) => <Face {...props} />;
 export const DashboardIcon = (props) => <Dashboard {...props} />;
+export const GradientIcon = (props) => <Gradient {...props} />;
 export const HomeIcon = (props) => <Home {...props} />;
 export const ListAltIcon = (props) => <ListAlt {...props} />;
 export const LoginIcon = (props) => <Login {...props} />;
