@@ -2,6 +2,8 @@ import {
   AddBusiness,
   AutoAwesomeMosaic,
   Category,
+  CloseOutlined,
+  CloudUpload,
   Email,
   ExitToApp,
   Face,
@@ -21,6 +23,8 @@ export const AutoAwesomeMosaicIcon = (props) => (
   <AutoAwesomeMosaic {...props} />
 );
 export const CategoryIcon = (props) => <Category {...props} />;
+export const CloseOutlinedIcon = (props) => <CloseOutlined {...props} />;
+export const CloudUploadIcon = (props) => <CloudUpload {...props} />;
 export const EmailIcon = (props) => <Email {...props} />;
 export const ExitToAppIcon = (props) => <ExitToApp {...props} />;
 export const FaceIcon = (props) => <Face {...props} />;
