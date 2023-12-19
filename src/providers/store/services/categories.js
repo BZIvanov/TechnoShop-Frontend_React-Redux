@@ -51,6 +51,24 @@ export const categoriesApi = api.injectEndpoints({
         { type: 'Categories', id: category?._id },
       ],
     }),
+    getCategorySubcategories: build.query({
+      query(id) {
+        return {
+          url: `/categories/${id}/subcategories`,
+          method: 'GET',
+        };
+      },
+      transformResponse: (response) => response.subcategories,
+      providesTags: (result = []) => {
+        return [
+          ...result.map(({ _id }) => ({
+            type: 'CategorySubcategories',
+            id: _id,
+          })),
+          { type: 'CategorySubcategories', id: 'LIST' },
+        ];
+      },
+    }),
   }),
 });
 
@@ -59,4 +77,5 @@ export const {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
+  useGetCategorySubcategoriesQuery,
 } = categoriesApi;

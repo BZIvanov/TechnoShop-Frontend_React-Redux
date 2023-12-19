@@ -14,6 +14,7 @@ import {
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
 } from '../../../providers/store/services/categories';
+import { useSelector } from '../../../providers/store/store';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
@@ -30,19 +31,20 @@ const ManageCategory = () => {
   });
   const [filterCategoryText, setFilterCategoryText] = useState('');
 
-  const { data: categories = [], isLoading: isGettingCategories } =
-    useGetAllCategoriesQuery();
-  const [createCategory, { isLoading: isCreatingCategory }] =
-    useCreateCategoryMutation();
-  const [updateCategory, { isLoading: isUpdatingCategory }] =
-    useUpdateCategoryMutation();
-  const [deleteCategory, { isLoading: isDeletingCategory }] =
-    useDeleteCategoryMutation();
-  const isLoading =
-    isGettingCategories ||
-    isCreatingCategory ||
-    isUpdatingCategory ||
-    isDeletingCategory;
+  const { data: categories = [] } = useGetAllCategoriesQuery();
+  const [createCategory] = useCreateCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
+  const [deleteCategory] = useDeleteCategoryMutation();
+
+  const isLoading = useSelector((state) => {
+    const isSomeQueryPending = Object.values(state.api.queries).some(
+      (query) => query.status === 'pending'
+    );
+    const isSomeMutationPending = Object.values(state.api.mutations).some(
+      (mutation) => mutation.status === 'pending'
+    );
+    return isSomeQueryPending || isSomeMutationPending;
+  });
 
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;
