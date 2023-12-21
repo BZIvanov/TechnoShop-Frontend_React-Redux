@@ -47,9 +47,9 @@ export const subcategoriesApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (subcategory) => [
-        { type: 'Subcategories', id: subcategory?._id },
-      ],
+      invalidatesTags: (_subcategory, _err, id) => {
+        return [{ type: 'Subcategories', id }];
+      },
     }),
   }),
 });

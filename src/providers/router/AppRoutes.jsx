@@ -12,6 +12,7 @@ import ManageCategory from '../../components/category/ManageCategory/ManageCateg
 import ManageSubcategory from '../../components/subcategory/ManageSubcategory/ManageSubcategory';
 import ManageProduct from '../../components/product/ManageProduct/ManageProduct';
 import Products from '../../components/product/Products/Products';
+import ManageCoupon from '../../components/coupon/ManageCoupon/ManageCoupon';
 
 const AppRoutes = () => {
   return (
@@ -71,6 +72,7 @@ const AppRoutes = () => {
         <Route path='product' element={<ManageProduct />} />
         <Route path='product/:productId' element={<ManageProduct />} />
         <Route path='products-list' element={<Products />} />
+        <Route path='coupon' element={<ManageCoupon />} />
         <Route path='password' element={<PasswordUpdateForm />} />
       </Route>
     </Routes>

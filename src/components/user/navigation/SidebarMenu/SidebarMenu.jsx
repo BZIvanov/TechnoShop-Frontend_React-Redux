@@ -6,6 +6,7 @@ import {
   AutoAwesomeMosaicIcon,
   CategoryIcon,
   DashboardIcon,
+  DiscountIcon,
   GradientIcon,
   ListAltIcon,
   PasswordIcon,
@@ -56,6 +57,11 @@ const adminLinks = [
     toLink: 'products-list',
     icon: <PhoneAndroidIcon fontSize='small' />,
     linkText: 'Products List',
+  },
+  {
+    toLink: 'coupon',
+    icon: <DiscountIcon fontSize='small' />,
+    linkText: 'Coupon',
   },
   {
     toLink: 'password',

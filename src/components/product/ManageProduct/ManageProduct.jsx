@@ -29,6 +29,7 @@ import { resizeImage } from '../../../utils/image-resizer';
 import { formConfig } from './form-schema';
 
 const ManageProduct = () => {
+  // if product id is found in the url, we are editing a product
   const { productId } = useParams();
 
   const [newImages, setNewImages] = useState([]);
@@ -45,25 +46,14 @@ const ManageProduct = () => {
 
   const selectedCategoryId = watch('category');
 
-  const { data: categories = [], isSuccess: isGetCategoriesSuccess } =
-    useGetAllCategoriesQuery();
-  const {
-    data: selectedCategorySubcategories = [],
-    isSuccess: isGetCategorySubcategoriesSuccess,
-  } = useGetCategorySubcategoriesQuery(selectedCategoryId, {
-    skip: !selectedCategoryId,
-  });
-  const { data: product } = useGetProductQuery(productId, {
-    // do not load product if productId is not provided (it's not edit)
-    // do not load product if categories and subcategories were not already loaded, because they are needed for the dropdowns
-    skip:
-      !productId ||
-      !isGetCategoriesSuccess ||
-      !isGetCategorySubcategoriesSuccess,
-  });
+  const { data: categories = [] } = useGetAllCategoriesQuery();
+  const { data: selectedCategorySubcategories = [] } =
+    useGetCategorySubcategoriesQuery(selectedCategoryId, {
+      skip: !selectedCategoryId,
+    });
+  const { data: product } = useGetProductQuery(productId, { skip: !productId });
 
   useEffect(() => {
-    // if product id is found in the url, we are editing a product
     if (productId && product) {
       setValue('title', product.title);
       setValue('description', product.description);

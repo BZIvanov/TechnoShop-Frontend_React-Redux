@@ -47,7 +47,21 @@ export const productsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (product) => [{ type: 'Products', id: product?._id }],
+      invalidatesTags: (product) => {
+        return [{ type: 'Products', id: product?._id }];
+      },
+    }),
+    deleteProduct: build.mutation({
+      query(id) {
+        return {
+          url: `products/${id}`,
+          method: 'DELETE',
+          credentials: 'include',
+        };
+      },
+      invalidatesTags: (_product, _err, id) => {
+        return [{ type: 'Products', id }];
+      },
     }),
   }),
 });
@@ -57,4 +71,5 @@ export const {
   useGetProductQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productsApi;
