@@ -35,7 +35,7 @@ const ProductsList = ({
           backgroundColor: (theme) => theme.palette.grey[300],
         }}
       >
-        {header}
+        {header} ({totalCount} products)
       </Typography>
 
       <Paper sx={{ width: '100%', padding: 2 }}>

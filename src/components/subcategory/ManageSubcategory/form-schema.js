@@ -6,6 +6,7 @@ const schema = yup
     subcategoryName: yup
       .string()
       .min(2)
+      .max(32)
       .required('Subcategory name is required'),
   })
   .required();

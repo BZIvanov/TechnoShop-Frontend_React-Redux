@@ -14,7 +14,8 @@ import {
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
 } from '../../../providers/store/services/categories';
-import { useSelector } from '../../../providers/store/store';
+import { useSelector, useDispatch } from '../../../providers/store/store';
+import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
@@ -22,6 +23,8 @@ import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './form-schema';
 
 const ManageCategory = () => {
+  const dispatch = useDispatch();
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   // TODO rewrite the confirm dialog with createConext or redux or something like that
   const [removeCategoryDialog, setRemoveCategoryDialog] = useState({
@@ -49,16 +52,31 @@ const ManageCategory = () => {
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;
 
-  const handleCategorySubmit = ({ category }) => {
+  const handleCategorySubmit = async ({ category }) => {
+    let result;
     if (selectedCategory) {
-      updateCategory({ id: selectedCategory._id, name: category });
+      result = await updateCategory({
+        id: selectedCategory._id,
+        name: category,
+      });
     } else {
-      createCategory({ name: category });
+      result = await createCategory({ name: category });
     }
 
-    reset();
+    if (!('error' in result)) {
+      dispatch(
+        showNotification({
+          type: 'success',
+          message: `Category ${
+            selectedCategory ? 'updated' : 'created'
+          } successfully`,
+        })
+      );
 
-    setSelectedCategory(null);
+      reset();
+
+      setSelectedCategory(null);
+    }
   };
 
   const handleCategoryDelete = (categoryId) => () => {

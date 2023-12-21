@@ -15,7 +15,8 @@ import {
   useUpdateSubcategoryMutation,
   useDeleteSubcategoryMutation,
 } from '../../../providers/store/services/subcategories';
-import { useSelector } from '../../../providers/store/store';
+import { useSelector, useDispatch } from '../../../providers/store/store';
+import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
@@ -24,6 +25,8 @@ import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './form-schema';
 
 const ManageSubcategory = () => {
+  const dispatch = useDispatch();
+
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [removeSubcategoryDialog, setRemoveSubcategoryDialog] = useState({
     open: false,
@@ -51,20 +54,32 @@ const ManageSubcategory = () => {
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;
 
-  const handleSubcategorySubmit = ({ categoryId, subcategoryName }) => {
+  const handleSubcategorySubmit = async ({ categoryId, subcategoryName }) => {
+    let result;
     if (selectedSubcategory) {
-      updateSubcategory({
+      result = await updateSubcategory({
         id: selectedSubcategory._id,
         name: subcategoryName,
         categoryId,
       });
     } else {
-      createSubcategory({ name: subcategoryName, categoryId });
+      result = await createSubcategory({ name: subcategoryName, categoryId });
     }
 
-    reset();
+    if (!('error' in result)) {
+      dispatch(
+        showNotification({
+          type: 'success',
+          message: `Subcategory ${
+            selectedSubcategory ? 'updated' : 'created'
+          } successfully`,
+        })
+      );
 
-    setSelectedSubcategory(null);
+      reset();
+
+      setSelectedSubcategory(null);
+    }
   };
 
   const handleSubcategoryDelete = (subcategoryId) => () => {

@@ -16,7 +16,8 @@ import {
   useGetAllCategoriesQuery,
   useGetCategorySubcategoriesQuery,
 } from '../../../providers/store/services/categories';
-import { useSelector } from '../../../providers/store/store';
+import { useSelector, useDispatch } from '../../../providers/store/store';
+import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
@@ -29,6 +30,8 @@ import { resizeImage } from '../../../utils/image-resizer';
 import { formConfig } from './form-schema';
 
 const ManageProduct = () => {
+  const dispatch = useDispatch();
+
   // if product id is found in the url, we are editing a product
   const { productId } = useParams();
 
@@ -95,21 +98,34 @@ const ManageProduct = () => {
         };
       });
 
+    let result;
     if (productId) {
       // concat the previous images with the new uploads, because when editing we can upload even more images
-      values.images = values.images.concat(values.existingImages);
+      values.images = values.images.concat(existingImages);
 
-      updateProduct({ id: productId, ...values });
+      result = await updateProduct({ id: productId, ...values });
     } else {
-      createProduct(values);
+      result = await createProduct(values);
+    }
+
+    if (!('error' in result)) {
+      dispatch(
+        showNotification({
+          type: 'success',
+          message: `Product ${productId ? 'updated' : 'created'} successfully`,
+        })
+      );
     }
   };
 
   useEffect(() => {
     // reset the form if the product was successfully created or updated
     if (isCreateProductSuccess || isUpdateProductSuccess) {
-      reset();
       setExistingImages([]);
+    }
+
+    if (isCreateProductSuccess) {
+      reset();
     }
   }, [reset, isCreateProductSuccess, isUpdateProductSuccess]);
 
