@@ -2,6 +2,21 @@ import { api } from './api';
 
 export const productsApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getProducts: build.query({
+      query: (params = {}) => ({
+        url: '/products',
+        method: 'GET',
+        params,
+      }),
+      providesTags: (result) => {
+        const products = result?.products || [];
+
+        return [
+          ...products.map(({ _id }) => ({ type: 'Products', id: _id })),
+          { type: 'Products', id: 'LIST' },
+        ];
+      },
+    }),
     getProduct: build.query({
       query: (id) => ({
         url: `/products/${id}`,
@@ -38,6 +53,7 @@ export const productsApi = api.injectEndpoints({
 });
 
 export const {
+  useGetProductsQuery,
   useGetProductQuery,
   useCreateProductMutation,
   useUpdateProductMutation,

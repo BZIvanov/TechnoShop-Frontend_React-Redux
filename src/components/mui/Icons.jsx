@@ -14,6 +14,7 @@ import {
   Login,
   Password,
   PersonAdd,
+  PhoneAndroid,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
@@ -35,5 +36,6 @@ export const ListAltIcon = (props) => <ListAlt {...props} />;
 export const LoginIcon = (props) => <Login {...props} />;
 export const PasswordIcon = (props) => <Password {...props} />;
 export const PersonAddIcon = (props) => <PersonAdd {...props} />;
+export const PhoneAndroidIcon = (props) => <PhoneAndroid {...props} />;
 export const VisibilityIcon = (props) => <Visibility {...props} />;
 export const VisibilityOffIcon = (props) => <VisibilityOff {...props} />;

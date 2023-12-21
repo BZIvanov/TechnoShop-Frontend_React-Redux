@@ -9,6 +9,7 @@ import {
   GradientIcon,
   ListAltIcon,
   PasswordIcon,
+  PhoneAndroidIcon,
 } from '../../../mui/Icons';
 import SidebarMenuLink from '../SidebarMenuLink/SidebarMenuLink';
 
@@ -50,6 +51,11 @@ const adminLinks = [
     toLink: 'product',
     icon: <GradientIcon fontSize='small' />,
     linkText: 'Manage products',
+  },
+  {
+    toLink: 'products-list',
+    icon: <PhoneAndroidIcon fontSize='small' />,
+    linkText: 'Products List',
   },
   {
     toLink: 'password',

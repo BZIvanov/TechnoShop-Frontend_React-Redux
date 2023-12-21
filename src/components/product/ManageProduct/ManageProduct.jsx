@@ -86,28 +86,31 @@ const ManageProduct = () => {
   }, [setValue, reset, productId, product]);
 
   const handleProductSubmit = async (values) => {
-    if (productId) {
-      updateProduct({ productId, existingImages, ...values });
-    } else {
-      const resizedImageFiles = await Promise.all(
-        values.images.map((image) => resizeImage(image))
-      );
-      const imagePromises = resizedImageFiles.map((image) => {
-        return uploadImage({ image });
+    const resizedImageFiles = await Promise.all(
+      values.images.map((image) => resizeImage(image))
+    );
+    const imagePromises = resizedImageFiles.map((image) => {
+      return uploadImage({ image });
+    });
+    const uploadedImagesData = await Promise.allSettled(imagePromises);
+    // replace the values images with the response for each uploaded image, which is what will be stored in the database
+    values.images = uploadedImagesData
+      .filter((uploadedImage) => {
+        return uploadedImage.status === 'fulfilled';
+      })
+      .map((uploadedImage) => {
+        return {
+          publicId: uploadedImage.value.data.publicId,
+          imageUrl: uploadedImage.value.data.imageUrl,
+        };
       });
-      const uploadedImagesData = await Promise.allSettled(imagePromises);
-      // replace the values images with the response for each uploaded image, which is what will be stored in the database
-      values.images = uploadedImagesData
-        .filter((uploadedImage) => {
-          return uploadedImage.status === 'fulfilled';
-        })
-        .map((uploadedImage) => {
-          return {
-            publicId: uploadedImage.value.data.publicId,
-            imageUrl: uploadedImage.value.data.imageUrl,
-          };
-        });
 
+    if (productId) {
+      // concat the previous images with the new uploads, because when editing we can upload even more images
+      values.images = values.images.concat(values.existingImages);
+
+      updateProduct({ id: productId, ...values });
+    } else {
       createProduct(values);
     }
   };
