@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import NonUserRoute from '../../components/user/route/NonUserRoute/NonUserRoute';
 import ProtectedRoute from '../../components/user/route/ProtectedRoute/ProtectedRoute';
+import Home from '../../components/home/Home/Home';
 import RegisterForm from '../../components/user/auth/RegisterForm/RegisterForm';
 import LoginForm from '../../components/user/auth/LoginForm/LoginForm';
 import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
@@ -17,7 +18,7 @@ import ManageCoupon from '../../components/coupon/ManageCoupon/ManageCoupon';
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<div>Home</div>} />
+      <Route path='/' element={<Home />} />
       <Route
         path='/register'
         element={
