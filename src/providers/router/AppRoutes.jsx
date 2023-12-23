@@ -13,6 +13,7 @@ import ManageCategory from '../../components/category/ManageCategory/ManageCateg
 import ManageSubcategory from '../../components/subcategory/ManageSubcategory/ManageSubcategory';
 import ManageProduct from '../../components/product/ManageProduct/ManageProduct';
 import Products from '../../components/product/Products/Products';
+import ProductDetails from '../../components/product/ProductDetails/ProductDetails';
 import ManageCoupon from '../../components/coupon/ManageCoupon/ManageCoupon';
 
 const AppRoutes = () => {
@@ -76,6 +77,7 @@ const AppRoutes = () => {
         <Route path='coupon' element={<ManageCoupon />} />
         <Route path='password' element={<PasswordUpdateForm />} />
       </Route>
+      <Route path='/product/:productId' element={<ProductDetails />} />
     </Routes>
   );
 };
