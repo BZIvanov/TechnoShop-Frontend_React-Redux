@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -10,10 +10,14 @@ import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 
-import { useGetProductQuery } from '../../../providers/store/services/products';
+import {
+  useGetProductQuery,
+  useRateProductMutation,
+} from '../../../providers/store/services/products';
 import { useSelector } from '../../../providers/store/store';
 import { selectUser } from '../../../providers/store/features/user/userSlice';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
+import RatingDialog from '../../common/dialogs/RatingDialog/RatingDialog';
 import ProductInfoTabs from './ProductInfoTabs/ProductInfoTabs';
 import ImagesCarousel from '../../common/image-preview/ImagesCarousel/ImagesCarousel';
 import {
@@ -29,10 +33,29 @@ const ProductDetails = () => {
   const { productId } = useParams();
 
   const [rating, setRating] = useState(0);
+  const [showRatingModal, setShowRatingModal] = useState(false);
 
   const user = useSelector(selectUser);
 
   const { data: product } = useGetProductQuery(productId);
+
+  const [rateProduct] = useRateProductMutation();
+
+  useEffect(() => {
+    // if the user previously rated the product use its rating
+    if (product && user) {
+      const userRating = product.ratings.find(
+        (rating) => rating.postedBy === user._id
+      );
+      userRating && setRating(userRating.stars);
+    }
+
+    return () => setRating(0);
+  }, [product, user]);
+
+  const handleRateProduct = () => {
+    rateProduct({ id: product._id, rating });
+  };
 
   return (
     <>
@@ -214,17 +237,16 @@ const ProductDetails = () => {
 
                 <Button
                   onClick={() => {
-                    // TODO
-                    // if (user) {
-                    //   setShowRatingModal(true);
-                    // } else {
-                    //   // if the user was trying to rate a product while not logged in, redirect him back to the product page after login
-                    //   navigate('/login', {
-                    //     state: {
-                    //       customNavigateTo: `/product/${product._id}`,
-                    //     },
-                    //   });
-                    // }
+                    if (user) {
+                      setShowRatingModal(true);
+                    } else {
+                      // if the user was trying to rate a product while not logged in, redirect him back to the product page after login
+                      navigate('/login', {
+                        state: {
+                          customNavigateTo: `/product/${product._id}`,
+                        },
+                      });
+                    }
                   }}
                   sx={{ display: 'flex', flexDirection: 'column' }}
                 >
@@ -254,6 +276,14 @@ const ProductDetails = () => {
           </Grid>
         </Grid>
       )}
+
+      <RatingDialog
+        showRatingModal={showRatingModal}
+        setShowRatingModal={setShowRatingModal}
+        rating={rating}
+        setRating={setRating}
+        rateProduct={handleRateProduct}
+      />
     </>
   );
 };

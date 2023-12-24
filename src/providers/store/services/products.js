@@ -63,6 +63,22 @@ export const productsApi = api.injectEndpoints({
         return [{ type: 'Products', id }];
       },
     }),
+    rateProduct: build.mutation({
+      query: (data) => {
+        const { id, ...body } = data;
+
+        return {
+          url: `/products/${id}/rate`,
+          method: 'PATCH',
+          body,
+          credentials: 'include',
+        };
+      },
+      transformResponse: (response) => response.product,
+      invalidatesTags: (product) => {
+        return [{ type: 'Products', id: product?._id }];
+      },
+    }),
   }),
 });
 
@@ -72,4 +88,5 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useRateProductMutation,
 } = productsApi;
