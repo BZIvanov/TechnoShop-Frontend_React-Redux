@@ -12,6 +12,7 @@ import Divider from '@mui/material/Divider';
 
 import {
   useGetProductQuery,
+  useGetSimilarProductsQuery,
   useRateProductMutation,
 } from '../../../providers/store/services/products';
 import { useSelector } from '../../../providers/store/store';
@@ -19,6 +20,7 @@ import { selectUser } from '../../../providers/store/features/user/userSlice';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import RatingDialog from '../../common/dialogs/RatingDialog/RatingDialog';
 import ProductInfoTabs from './ProductInfoTabs/ProductInfoTabs';
+import ProductsList from '../ProductsList/ProductsList';
 import ImagesCarousel from '../../common/image-preview/ImagesCarousel/ImagesCarousel';
 import {
   AddShoppingCartIcon,
@@ -38,6 +40,7 @@ const ProductDetails = () => {
   const user = useSelector(selectUser);
 
   const { data: product } = useGetProductQuery(productId);
+  const { data: similarProductsData } = useGetSimilarProductsQuery(productId);
 
   const [rateProduct] = useRateProductMutation();
 
@@ -272,7 +275,12 @@ const ProductDetails = () => {
           </Box>
 
           <Grid item={true} xs={12}>
-            TODO Similar products
+            <ProductsList
+              header='Similar Products'
+              products={similarProductsData?.products}
+              showPagination={false}
+              totalCount={similarProductsData?.totalCount}
+            />
           </Grid>
         </Grid>
       )}

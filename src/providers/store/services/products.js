@@ -3,17 +3,36 @@ import { api } from './api';
 export const productsApi = api.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.query({
-      query: (params = {}) => ({
-        url: '/products',
-        method: 'GET',
-        params,
-      }),
+      query: (params = {}) => {
+        return {
+          url: '/products',
+          method: 'GET',
+          params,
+        };
+      },
       providesTags: (result) => {
         const products = result?.products || [];
 
         return [
           ...products.map(({ _id }) => ({ type: 'Products', id: _id })),
           { type: 'Products', id: 'LIST' },
+        ];
+      },
+    }),
+    getSimilarProducts: build.query({
+      query: (id) => {
+        return {
+          url: `/products/${id}/similar`,
+          method: 'GET',
+        };
+      },
+      providesTags: (result) => {
+        return [
+          ...result.products.map(({ _id }) => ({
+            type: 'SimilarProducts',
+            id: _id,
+          })),
+          { type: 'SimilarProducts', id: 'LIST' },
         ];
       },
     }),
@@ -84,6 +103,7 @@ export const productsApi = api.injectEndpoints({
 
 export const {
   useGetProductsQuery,
+  useGetSimilarProductsQuery,
   useGetProductQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
