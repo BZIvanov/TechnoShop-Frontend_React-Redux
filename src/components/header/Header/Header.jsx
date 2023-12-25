@@ -5,7 +5,9 @@ import Box from '@mui/material/Box';
 
 import { useLogoutMutation } from '../../../providers/store/services/users';
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
+import HeaderSearch from '../HeaderSearch/HeaderSearch';
 import {
+  AddBusinessIcon,
   ExitToAppIcon,
   DashboardIcon,
   HomeIcon,
@@ -39,9 +41,16 @@ const Header = () => {
             >
               <Box sx={{ display: 'flex' }}>
                 <HeaderNavLink toLink='/' linkText='Home' icon={<HomeIcon />} />
+                <HeaderNavLink
+                  toLink='/shop'
+                  linkText='Shop'
+                  icon={<AddBusinessIcon />}
+                />
               </Box>
 
               <Box sx={{ display: 'flex' }}>
+                <HeaderSearch />
+
                 {user ? (
                   <>
                     <HeaderNavLink
