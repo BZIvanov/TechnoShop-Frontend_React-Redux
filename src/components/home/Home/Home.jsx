@@ -1,13 +1,13 @@
-import { useGetAllCategoriesQuery } from '../../../providers/store/services/categories';
-import { useGetAllSubcategoriesQuery } from '../../../providers/store/services/subcategories';
+import { useGetCategoriesQuery } from '../../../providers/store/services/categories';
+import { useGetSubcategoriesQuery } from '../../../providers/store/services/subcategories';
 import ChipsList from '../../common/lists/ChipsList/ChipsList';
 import TypeWriterText from '../../common/visuals/TypeWriterText/TypeWriterText';
 import ProductsSection from '../ProductsSection/ProductsSection';
 import { TYPEWRITER_TEXTS } from '../constants';
 
 const Home = () => {
-  const { data: categories } = useGetAllCategoriesQuery();
-  const { data: subcategories } = useGetAllSubcategoriesQuery();
+  const { data: categories } = useGetCategoriesQuery();
+  const { data: subcategories } = useGetSubcategoriesQuery();
 
   return (
     <>

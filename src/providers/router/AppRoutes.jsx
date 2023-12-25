@@ -15,6 +15,8 @@ import ManageProduct from '../../components/product/ManageProduct/ManageProduct'
 import Products from '../../components/product/Products/Products';
 import ProductDetails from '../../components/product/ProductDetails/ProductDetails';
 import ManageCoupon from '../../components/coupon/ManageCoupon/ManageCoupon';
+import CategoryProducts from '../../components/category/CategoryProducts/CategoryProducts';
+import SubcategoryProducts from '../../components/subcategory/SubcategoryProducts/SubcategoryProducts';
 
 const AppRoutes = () => {
   return (
@@ -78,6 +80,11 @@ const AppRoutes = () => {
         <Route path='password' element={<PasswordUpdateForm />} />
       </Route>
       <Route path='/product/:productId' element={<ProductDetails />} />
+      <Route path='/category/:categoryId' element={<CategoryProducts />} />
+      <Route
+        path='/subcategory/:subcategoryId'
+        element={<SubcategoryProducts />}
+      />
     </Routes>
   );
 };

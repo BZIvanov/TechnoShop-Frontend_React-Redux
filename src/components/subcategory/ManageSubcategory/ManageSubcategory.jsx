@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 
-import { useGetAllCategoriesQuery } from '../../../providers/store/services/categories';
+import { useGetCategoriesQuery } from '../../../providers/store/services/categories';
 import {
-  useGetAllSubcategoriesQuery,
+  useGetSubcategoriesQuery,
   useCreateSubcategoryMutation,
   useUpdateSubcategoryMutation,
   useDeleteSubcategoryMutation,
@@ -35,8 +35,8 @@ const ManageSubcategory = () => {
   });
   const [filterSubcategoryText, setFilterSubcategoryText] = useState('');
 
-  const { data: categories = [] } = useGetAllCategoriesQuery();
-  const { data: subcategories = [] } = useGetAllSubcategoriesQuery();
+  const { data: categories = [] } = useGetCategoriesQuery();
+  const { data: subcategories = [] } = useGetSubcategoriesQuery();
   const [createSubcategory] = useCreateSubcategoryMutation();
   const [updateSubcategory] = useUpdateSubcategoryMutation();
   const [deleteSubcategory] = useDeleteSubcategoryMutation();

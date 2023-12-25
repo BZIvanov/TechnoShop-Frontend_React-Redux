@@ -2,7 +2,7 @@ import { api } from './api';
 
 export const categoriesApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getAllCategories: build.query({
+    getCategories: build.query({
       query: () => ({
         url: '/categories',
         method: 'GET',
@@ -13,6 +13,16 @@ export const categoriesApi = api.injectEndpoints({
           ...result.map(({ _id }) => ({ type: 'Categories', id: _id })),
           { type: 'Categories', id: 'LIST' },
         ];
+      },
+    }),
+    getCategory: build.query({
+      query: (id) => ({
+        url: `/categories/${id}`,
+        method: 'GET',
+      }),
+      transformResponse: (response) => response.category,
+      providesTags: (_product, _err, id) => {
+        return [{ type: 'Categories', id }];
       },
     }),
     createCategory: build.mutation({
@@ -69,13 +79,34 @@ export const categoriesApi = api.injectEndpoints({
         ];
       },
     }),
+    getCategoryProducts: build.query({
+      query: (data) => {
+        const { id, ...rest } = data;
+        return {
+          url: `/categories/${id}/products`,
+          method: 'GET',
+          params: rest,
+        };
+      },
+      providesTags: (result) => {
+        return [
+          ...result.products.map(({ _id }) => ({
+            type: 'CategoryProducts',
+            id: _id,
+          })),
+          { type: 'CategoryProducts', id: 'LIST' },
+        ];
+      },
+    }),
   }),
 });
 
 export const {
-  useGetAllCategoriesQuery,
+  useGetCategoriesQuery,
+  useGetCategoryQuery,
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
   useGetCategorySubcategoriesQuery,
+  useGetCategoryProductsQuery,
 } = categoriesApi;

@@ -2,7 +2,7 @@ import { api } from './api';
 
 export const subcategoriesApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getAllSubcategories: build.query({
+    getSubcategories: build.query({
       query: () => ({
         url: '/subcategories',
         method: 'GET',
@@ -13,6 +13,16 @@ export const subcategoriesApi = api.injectEndpoints({
           ...result.map(({ _id }) => ({ type: 'Subcategories', id: _id })),
           { type: 'Subcategories', id: 'LIST' },
         ];
+      },
+    }),
+    getSubcategory: build.query({
+      query: (id) => ({
+        url: `/subcategories/${id}`,
+        method: 'GET',
+      }),
+      transformResponse: (response) => response.subcategory,
+      providesTags: (_product, _err, id) => {
+        return [{ type: 'Subcategories', id }];
       },
     }),
     createSubcategory: build.mutation({
@@ -51,12 +61,33 @@ export const subcategoriesApi = api.injectEndpoints({
         return [{ type: 'Subcategories', id }];
       },
     }),
+    getSubcategoryProducts: build.query({
+      query: (data) => {
+        const { id, ...rest } = data;
+        return {
+          url: `/subcategories/${id}/products`,
+          method: 'GET',
+          params: rest,
+        };
+      },
+      providesTags: (result) => {
+        return [
+          ...result.products.map(({ _id }) => ({
+            type: 'SubcategoryProducts',
+            id: _id,
+          })),
+          { type: 'SubcategoryProducts', id: 'LIST' },
+        ];
+      },
+    }),
   }),
 });
 
 export const {
-  useGetAllSubcategoriesQuery,
+  useGetSubcategoriesQuery,
+  useGetSubcategoryQuery,
   useCreateSubcategoryMutation,
   useUpdateSubcategoryMutation,
   useDeleteSubcategoryMutation,
+  useGetSubcategoryProductsQuery,
 } = subcategoriesApi;

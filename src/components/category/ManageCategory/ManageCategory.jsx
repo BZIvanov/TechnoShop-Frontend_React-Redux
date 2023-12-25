@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 
 import {
-  useGetAllCategoriesQuery,
+  useGetCategoriesQuery,
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
@@ -34,7 +34,7 @@ const ManageCategory = () => {
   });
   const [filterCategoryText, setFilterCategoryText] = useState('');
 
-  const { data: categories = [] } = useGetAllCategoriesQuery();
+  const { data: categories = [] } = useGetCategoriesQuery();
   const [createCategory] = useCreateCategoryMutation();
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();

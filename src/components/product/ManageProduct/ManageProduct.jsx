@@ -13,7 +13,7 @@ import {
 } from '../../../providers/store/services/products';
 import { useUploadImageMutation } from '../../../providers/store/services/images';
 import {
-  useGetAllCategoriesQuery,
+  useGetCategoriesQuery,
   useGetCategorySubcategoriesQuery,
 } from '../../../providers/store/services/categories';
 import { useSelector, useDispatch } from '../../../providers/store/store';
@@ -49,7 +49,7 @@ const ManageProduct = () => {
 
   const selectedCategoryId = watch('category');
 
-  const { data: categories = [] } = useGetAllCategoriesQuery();
+  const { data: categories = [] } = useGetCategoriesQuery();
   const { data: selectedCategorySubcategories = [] } =
     useGetCategorySubcategoriesQuery(selectedCategoryId, {
       skip: !selectedCategoryId,
