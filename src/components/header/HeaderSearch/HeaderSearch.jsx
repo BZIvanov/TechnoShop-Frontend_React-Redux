@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from '../../../providers/store/store';
 import {
   selectFilters,
   changeFilter,
-} from '../../../providers/store/features/filters/filtersSlice';
+} from '../../../providers/store/features/productsFilters/productsFiltersSlice';
 import { SearchIcon } from '../../mui/Icons';
 
 const HeaderSearch = () => {

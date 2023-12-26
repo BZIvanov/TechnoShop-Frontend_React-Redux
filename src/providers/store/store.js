@@ -7,7 +7,7 @@ import {
 import { api } from './services/api';
 import userSlice from './features/user/userSlice';
 import notificationSlice from './features/notification/notificationSlice';
-import filtersSlice from './features/filters/filtersSlice';
+import productsFiltersSlice from './features/productsFilters/productsFiltersSlice';
 import cartSlice from './features/cart/cartSlice';
 import { asyncErrorNotification } from './middlewares/asyncErrorNotification';
 
@@ -17,7 +17,7 @@ export const createStore = (options = {}) => {
       [api.reducerPath]: api.reducer,
       user: userSlice,
       notification: notificationSlice,
-      filters: filtersSlice,
+      productsFilters: productsFiltersSlice,
       cart: cartSlice,
     },
     middleware: (getDefaultMiddleware) =>

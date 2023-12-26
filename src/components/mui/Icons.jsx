@@ -1,6 +1,7 @@
 import {
   AddBusiness,
   AddShoppingCart,
+  AttachMoney,
   AutoAwesomeMosaic,
   Category,
   CloseOutlined,
@@ -33,6 +34,7 @@ import {
 
 export const AddBusinessIcon = (props) => <AddBusiness {...props} />;
 export const AddShoppingCartIcon = (props) => <AddShoppingCart {...props} />;
+export const AttachMoneyIcon = (props) => <AttachMoney {...props} />;
 export const AutoAwesomeMosaicIcon = (props) => (
   <AutoAwesomeMosaic {...props} />
 );
