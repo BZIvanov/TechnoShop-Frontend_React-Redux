@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import FormControl from '@mui/material/FormControl';
@@ -47,20 +47,55 @@ const Shop = () => {
 
   const [localPrice, setLocalPrice] = useState(price);
 
+  const [queryParams, setQueryParams] = useState(() => {
+    // set initial query params
+    return {
+      page,
+      perPage: PRODUCTS_PER_PAGE,
+      text,
+      price: price.join(','),
+      categories: selectedCategories.map((category) => category._id).join(','),
+      subcategories: selectedSubcategories
+        .map((subcategory) => subcategory._id)
+        .join(','),
+      rating: rating || '',
+      shipping,
+    };
+  });
+
+  useEffect(() => {
+    // update query params not more often than half a second to query the products with the latest params
+    const throttle = setTimeout(() => {
+      setQueryParams({
+        page,
+        perPage: PRODUCTS_PER_PAGE,
+        text,
+        price: price.join(','),
+        categories: selectedCategories
+          .map((category) => category._id)
+          .join(','),
+        subcategories: selectedSubcategories
+          .map((subcategory) => subcategory._id)
+          .join(','),
+        rating: rating || '',
+        shipping,
+      });
+    }, 1500);
+
+    return () => clearTimeout(throttle);
+  }, [
+    page,
+    text,
+    price,
+    selectedCategories,
+    selectedSubcategories,
+    rating,
+    shipping,
+  ]);
+
   const { data: categories = [] } = useGetCategoriesQuery();
   const { data: subcategories = [] } = useGetSubcategoriesQuery();
-  const { data } = useGetProductsQuery({
-    page,
-    perPage: PRODUCTS_PER_PAGE,
-    text,
-    price: price.join(','),
-    categories: selectedCategories.map((category) => category._id).join(','),
-    subcategories: selectedSubcategories
-      .map((subcategory) => subcategory._id)
-      .join(','),
-    rating: rating || '',
-    shipping,
-  });
+  const { data } = useGetProductsQuery(queryParams);
 
   const handlePageChange = (_, value) => {
     setPage(value);
