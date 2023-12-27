@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 
 import { useSelector, useDispatch } from '../../../providers/store/store';
 import {
-  selectFilters,
+  selectTextFilter,
   changeFilter,
 } from '../../../providers/store/features/productsFilters/productsFiltersSlice';
 import { SearchIcon } from '../../mui/Icons';
@@ -14,7 +14,7 @@ const HeaderSearch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { text } = useSelector(selectFilters);
+  const text = useSelector(selectTextFilter);
 
   const handleSearchChange = (e) => {
     dispatch(changeFilter({ text: e.target.value }));
