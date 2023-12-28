@@ -98,6 +98,25 @@ export const productsApi = api.injectEndpoints({
         return [{ type: 'Products', id: product?._id }];
       },
     }),
+    getProductsBrands: build.query({
+      query: () => {
+        return {
+          url: `/products/brands`,
+          method: 'GET',
+        };
+      },
+      providesTags: (result) => {
+        return [
+          ...result.brands.map((brand) => {
+            return {
+              type: 'ProductsBrands',
+              id: brand,
+            };
+          }),
+          { type: 'ProductsBrands', id: 'LIST' },
+        ];
+      },
+    }),
   }),
 });
 
@@ -109,4 +128,5 @@ export const {
   useUpdateProductMutation,
   useDeleteProductMutation,
   useRateProductMutation,
+  useGetProductsBrandsQuery,
 } = productsApi;

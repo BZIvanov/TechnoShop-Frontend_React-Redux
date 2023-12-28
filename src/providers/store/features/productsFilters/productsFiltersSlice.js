@@ -7,6 +7,7 @@ const initialState = {
   subcategories: [],
   rating: null,
   shipping: '',
+  brands: [],
 };
 
 const productsFiltersSlice = createSlice({
@@ -32,3 +33,4 @@ export const selectSubcategoriesFilter = (state) =>
   state.productsFilters.subcategories;
 export const selectRatingFilter = (state) => state.productsFilters.rating;
 export const selectShippingFilter = (state) => state.productsFilters.shipping;
+export const selectBrandsFilter = (state) => state.productsFilters.brands;

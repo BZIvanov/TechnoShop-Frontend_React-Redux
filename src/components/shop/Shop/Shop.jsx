@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 
@@ -11,78 +11,50 @@ import CategoryFilter from '../filters/CategoryFilter';
 import SubcategoryFilter from '../filters/SubcategoryFilter';
 import RatingFilter from '../filters/RatingFilter';
 import ShippingFilter from '../filters/ShippingFilter';
+import BrandsFilter from '../filters/BrandsFilter';
 
 const PRODUCTS_PER_PAGE = 12;
 
 const Shop = () => {
   const [page, setPage] = useState(1);
 
-  const {
-    text,
-    price,
-    categories: selectedCategories,
-    subcategories: selectedSubcategories,
-    rating,
-    shipping,
-  } = useSelector(selectFilters);
+  const { text, price, categories, subcategories, rating, shipping, brands } =
+    useSelector(selectFilters);
 
   // reset page in case we were on some bigger page number and filtered to something with fewer pages
   useEffect(() => {
     setPage(1);
-  }, [
-    text,
-    price,
-    selectedCategories,
-    selectedSubcategories,
-    rating,
-    shipping,
-  ]);
+  }, [text, price, categories, subcategories, rating, shipping, brands]);
 
-  // set initial query params for products load query
-  const [queryParams, setQueryParams] = useState(() => {
+  const params = useMemo(() => {
     return {
       page,
       perPage: PRODUCTS_PER_PAGE,
       text,
       price: price.join(','),
-      categories: selectedCategories.map((category) => category._id).join(','),
-      subcategories: selectedSubcategories
+      categories: categories.map((category) => category._id).join(','),
+      subcategories: subcategories
         .map((subcategory) => subcategory._id)
         .join(','),
       rating: rating || '',
       shipping,
+      brands: brands.join(','),
     };
+  }, [page, text, price, categories, subcategories, rating, shipping, brands]);
+
+  // set initial query params for products load query
+  const [queryParams, setQueryParams] = useState(() => {
+    return params;
   });
 
   // update query params not more often than half a second to query the products with the latest params
   useEffect(() => {
     const throttle = setTimeout(() => {
-      setQueryParams({
-        page,
-        perPage: PRODUCTS_PER_PAGE,
-        text,
-        price: price.join(','),
-        categories: selectedCategories
-          .map((category) => category._id)
-          .join(','),
-        subcategories: selectedSubcategories
-          .map((subcategory) => subcategory._id)
-          .join(','),
-        rating: rating || '',
-        shipping,
-      });
+      setQueryParams(params);
     }, 500);
 
     return () => clearTimeout(throttle);
-  }, [
-    page,
-    text,
-    price,
-    selectedCategories,
-    selectedSubcategories,
-    rating,
-    shipping,
-  ]);
+  }, [params]);
 
   const { data } = useGetProductsQuery(queryParams);
 
@@ -101,6 +73,7 @@ const Shop = () => {
         <SubcategoryFilter />
         <RatingFilter />
         <ShippingFilter />
+        <BrandsFilter />
       </List>
 
       <Box sx={{ flexGrow: 1 }}>

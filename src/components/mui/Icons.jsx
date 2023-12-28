@@ -28,6 +28,7 @@ import {
   Search,
   Star,
   StarBorderOutlined,
+  Token,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
@@ -65,5 +66,6 @@ export const StarIcon = (props) => <Star {...props} />;
 export const StarBorderOutlinedIcon = (props) => (
   <StarBorderOutlined {...props} />
 );
+export const TokenIcon = (props) => <Token {...props} />;
 export const VisibilityIcon = (props) => <Visibility {...props} />;
 export const VisibilityOffIcon = (props) => <VisibilityOff {...props} />;
