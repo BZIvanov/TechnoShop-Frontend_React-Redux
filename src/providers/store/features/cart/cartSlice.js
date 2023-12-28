@@ -31,5 +31,6 @@ export const { addToCart, removeFromCart, clearCart, setDrawerOpen } =
 export default cartSlice.reducer;
 
 export const selectCart = (state) => state.cart.cart;
+export const selectIsDrawerOpen = (state) => state.cart.isDrawerOpen;
 export const selectCartProductById = (productId) => (state) =>
   state.cart.cart[productId];
