@@ -15,8 +15,13 @@ import {
   useGetSimilarProductsQuery,
   useRateProductMutation,
 } from '../../../providers/store/services/products';
-import { useSelector } from '../../../providers/store/store';
+import { useSelector, useDispatch } from '../../../providers/store/store';
 import { selectUser } from '../../../providers/store/features/user/userSlice';
+import {
+  addToCart,
+  setDrawerOpen,
+  selectCartProductById,
+} from '../../../providers/store/features/cart/cartSlice';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import RatingDialog from '../../common/dialogs/RatingDialog/RatingDialog';
 import ProductInfoTabs from './ProductInfoTabs/ProductInfoTabs';
@@ -31,6 +36,7 @@ import {
 
 const ProductDetails = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { productId } = useParams();
 
@@ -38,6 +44,8 @@ const ProductDetails = () => {
   const [showRatingModal, setShowRatingModal] = useState(false);
 
   const user = useSelector(selectUser);
+  const cartProduct = useSelector(selectCartProductById(productId));
+  const isProductInCart = cartProduct !== undefined;
 
   const { data: product } = useGetProductQuery(productId);
   const { data: similarProductsData } = useGetSimilarProductsQuery(productId);
@@ -207,22 +215,20 @@ const ProductDetails = () => {
               <CardActions>
                 <Button
                   onClick={() => {
-                    // TODO
-                    // if (!currentProductCart && product.quantity > 0) {
-                    //   dispatch(addToCart({ product, count: 1 }));
-                    //   dispatch(setDrawerOpen(true));
-                    // }
+                    if (!isProductInCart && product.quantity > 0) {
+                      dispatch(addToCart({ product, count: 1 }));
+                      dispatch(setDrawerOpen(true));
+                    }
                   }}
                   sx={{ display: 'flex', flexDirection: 'column' }}
                 >
                   <AddShoppingCartIcon />
                   <Typography variant='caption'>
-                    TODO
-                    {/* {product.quantity < 1
+                    {product.quantity < 1
                       ? 'Out of stock'
-                      : currentProductCart
+                      : isProductInCart
                       ? 'Already in the cart'
-                      : 'Add to cart'} */}
+                      : 'Add to cart'}
                   </Typography>
                 </Button>
 

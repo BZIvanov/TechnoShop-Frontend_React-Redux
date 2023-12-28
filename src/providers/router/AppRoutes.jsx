@@ -4,6 +4,7 @@ import NonUserRoute from '../../components/user/route/NonUserRoute/NonUserRoute'
 import ProtectedRoute from '../../components/user/route/ProtectedRoute/ProtectedRoute';
 import Home from '../../components/home/Home/Home';
 import Shop from '../../components/shop/Shop/Shop';
+import CartProducts from '../../components/cart/CartProducts/CartProducts';
 import RegisterForm from '../../components/user/auth/RegisterForm/RegisterForm';
 import LoginForm from '../../components/user/auth/LoginForm/LoginForm';
 import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
@@ -24,6 +25,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/shop' element={<Shop />} />
+      <Route path='/cart' element={<CartProducts />} />
       <Route
         path='/register'
         element={

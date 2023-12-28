@@ -12,8 +12,13 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import { useDeleteProductMutation } from '../../../providers/store/services/products';
-import { useSelector } from '../../../providers/store/store';
+import { useSelector, useDispatch } from '../../../providers/store/store';
 import { selectUser } from '../../../providers/store/features/user/userSlice';
+import {
+  addToCart,
+  setDrawerOpen,
+  selectCartProductById,
+} from '../../../providers/store/features/cart/cartSlice';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import {
   EditIcon,
@@ -28,10 +33,13 @@ const ProductCard = ({ product }) => {
   const { _id, title, price, description, quantity, images, ratings } = product;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [deleteProduct] = useDeleteProductMutation();
 
   const user = useSelector(selectUser);
+  const cartProduct = useSelector(selectCartProductById(_id));
+  const isProductInCart = cartProduct !== undefined;
 
   const isUserAdmin = user?.role === 'admin';
 
@@ -52,7 +60,6 @@ const ProductCard = ({ product }) => {
 
   // TODO
   const loading = false;
-  const currentProductCart = null;
 
   return (
     <>
@@ -164,7 +171,10 @@ const ProductCard = ({ product }) => {
 
                   <Button
                     onClick={() => {
-                      // TODO
+                      if (!isProductInCart && quantity > 0) {
+                        dispatch(addToCart({ product, count: 1 }));
+                        dispatch(setDrawerOpen(true));
+                      }
                     }}
                     sx={{ display: 'flex', flexDirection: 'column' }}
                   >
@@ -172,7 +182,7 @@ const ProductCard = ({ product }) => {
                     <Typography variant='caption'>
                       {quantity < 1
                         ? 'Out of stock'
-                        : currentProductCart
+                        : isProductInCart
                         ? 'Already in the cart'
                         : 'Add to cart'}
                     </Typography>
