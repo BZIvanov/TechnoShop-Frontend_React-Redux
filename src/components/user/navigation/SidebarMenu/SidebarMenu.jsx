@@ -28,7 +28,7 @@ const userLinks = [
   {
     toLink: 'password',
     icon: <PasswordIcon fontSize='small' />,
-    linkText: 'Password',
+    linkText: 'Update Password',
   },
 ];
 
@@ -36,7 +36,7 @@ const adminLinks = [
   {
     toLink: 'orders',
     icon: <DashboardIcon fontSize='small' />,
-    linkText: 'Orders',
+    linkText: 'Manage Orders',
   },
   {
     toLink: 'category',
@@ -61,12 +61,12 @@ const adminLinks = [
   {
     toLink: 'coupon',
     icon: <DiscountIcon fontSize='small' />,
-    linkText: 'Coupon',
+    linkText: 'Manage Coupons',
   },
   {
     toLink: 'password',
     icon: <PasswordIcon fontSize='small' />,
-    linkText: 'Password',
+    linkText: 'Update Password',
   },
 ];
 

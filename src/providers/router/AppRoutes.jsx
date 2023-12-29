@@ -19,6 +19,7 @@ import ProductDetails from '../../components/product/ProductDetails/ProductDetai
 import ManageCoupon from '../../components/coupon/ManageCoupon/ManageCoupon';
 import CategoryProducts from '../../components/category/CategoryProducts/CategoryProducts';
 import SubcategoryProducts from '../../components/subcategory/SubcategoryProducts/SubcategoryProducts';
+import Checkout from '../../components/checkout/Checkout/Checkout';
 
 const AppRoutes = () => {
   return (
@@ -88,6 +89,14 @@ const AppRoutes = () => {
       <Route
         path='/subcategory/:subcategoryId'
         element={<SubcategoryProducts />}
+      />
+      <Route
+        path='/checkout'
+        element={
+          <ProtectedRoute authRedirectTo='/login'>
+            <Checkout />
+          </ProtectedRoute>
+        }
       />
     </Routes>
   );
