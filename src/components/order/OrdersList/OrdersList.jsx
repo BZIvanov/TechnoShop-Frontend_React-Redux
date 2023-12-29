@@ -9,9 +9,12 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
+import TablePagination from '@mui/material/TablePagination';
 
 import { useSelector } from '../../../providers/store/store';
 import { selectUser } from '../../../providers/store/features/user/userSlice';
+import { useGetOrdersQuery } from '../../../providers/store/services/orders';
+import OrderTableRow from './OrderTableRow/OrderTableRow';
 
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 50];
 
@@ -20,6 +23,12 @@ const OrdersList = () => {
   const [rowsPerPage, setRowsPerPage] = useState(ROWS_PER_PAGE_OPTIONS[1]);
 
   const user = useSelector(selectUser);
+
+  const { data } = useGetOrdersQuery({
+    page,
+    perPage: rowsPerPage,
+  });
+  const { orders = [], totalCount = 0 } = data || {};
 
   const isUserAdmin = user && user.role === 'admin';
 
@@ -55,9 +64,42 @@ const OrdersList = () => {
                     backgroundColor: (theme) => theme.palette.action.hover,
                   },
                 }}
-              ></TableBody>
+              >
+                {orders.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={isUserAdmin ? 8 : 7} align='center'>
+                      <Typography variant='body2'>
+                        <strong>No orders found</strong>
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                )}
+
+                {orders.map((order) => {
+                  return (
+                    <OrderTableRow
+                      key={order._id}
+                      order={order}
+                      isAdminCell={isUserAdmin}
+                    />
+                  );
+                })}
+              </TableBody>
             </Table>
           </TableContainer>
+
+          <TablePagination
+            rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
+            component='div'
+            count={totalCount}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={(event, newPage) => setPage(newPage)}
+            onRowsPerPageChange={(event) => {
+              setRowsPerPage(parseInt(event.target.value, 10));
+              setPage(0);
+            }}
+          />
         </Paper>
       </Box>
     </Box>

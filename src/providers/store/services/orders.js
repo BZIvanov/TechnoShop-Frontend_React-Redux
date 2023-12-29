@@ -2,6 +2,24 @@ import { api } from './api';
 
 export const ordersApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getOrders: build.query({
+      query: (params = {}) => {
+        return {
+          url: '/orders',
+          method: 'GET',
+          params,
+          credentials: 'include',
+        };
+      },
+      providesTags: (result) => {
+        const orders = result?.orders || [];
+
+        return [
+          ...orders.map(({ _id }) => ({ type: 'Orders', id: _id })),
+          { type: 'Orders', id: 'LIST' },
+        ];
+      },
+    }),
     createOrder: build.mutation({
       query: (data) => ({
         url: '/orders',
@@ -14,4 +32,4 @@ export const ordersApi = api.injectEndpoints({
   }),
 });
 
-export const { useCreateOrderMutation } = ordersApi;
+export const { useGetOrdersQuery, useCreateOrderMutation } = ordersApi;
