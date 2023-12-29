@@ -73,7 +73,7 @@ export const productsApi = api.injectEndpoints({
     deleteProduct: build.mutation({
       query(id) {
         return {
-          url: `products/${id}`,
+          url: `/products/${id}`,
           method: 'DELETE',
           credentials: 'include',
         };
