@@ -38,7 +38,7 @@ const CartDrawer = () => {
         sx={{ paddingBlock: 1, textAlign: 'center', minWidth: 280 }}
         variant='body1'
       >
-        Products in cart
+        {cartIds.length} Products in cart
       </Typography>
 
       <Divider />
