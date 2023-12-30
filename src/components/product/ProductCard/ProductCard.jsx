@@ -39,9 +39,10 @@ const ProductCard = ({ product }) => {
 
   const user = useSelector(selectUser);
   const cartProduct = useSelector(selectCartProductById(_id));
-  const isProductInCart = cartProduct !== undefined;
 
   const isUserAdmin = user?.role === 'admin';
+  const isProductInCart = cartProduct !== undefined;
+  const isOutOfStock = quantity === 0;
 
   const [removeProductDialog, setRemoveProductDialog] = useState({
     open: false,
@@ -171,16 +172,17 @@ const ProductCard = ({ product }) => {
 
                   <Button
                     onClick={() => {
-                      if (!isProductInCart && quantity > 0) {
+                      if (!isProductInCart && !isOutOfStock) {
                         dispatch(addToCart({ product, count: 1 }));
                         dispatch(setDrawerOpen(true));
                       }
                     }}
                     sx={{ display: 'flex', flexDirection: 'column' }}
+                    disabled={isProductInCart || isOutOfStock}
                   >
                     <AddShoppingCartIcon />
                     <Typography variant='caption'>
-                      {quantity < 1
+                      {isOutOfStock
                         ? 'Out of stock'
                         : isProductInCart
                         ? 'Already in the cart'

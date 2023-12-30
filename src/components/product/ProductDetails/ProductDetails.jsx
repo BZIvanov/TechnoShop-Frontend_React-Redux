@@ -45,7 +45,6 @@ const ProductDetails = () => {
 
   const user = useSelector(selectUser);
   const cartProduct = useSelector(selectCartProductById(productId));
-  const isProductInCart = cartProduct !== undefined;
 
   const { data: product } = useGetProductQuery(productId);
   const { data: similarProductsData } = useGetSimilarProductsQuery(productId);
@@ -67,6 +66,9 @@ const ProductDetails = () => {
   const handleRateProduct = () => {
     rateProduct({ id: product._id, rating });
   };
+
+  const isProductInCart = cartProduct !== undefined;
+  const isOutOfStock = product.quantity === 0;
 
   return (
     <>
@@ -215,16 +217,17 @@ const ProductDetails = () => {
               <CardActions>
                 <Button
                   onClick={() => {
-                    if (!isProductInCart && product.quantity > 0) {
+                    if (!isProductInCart && !isOutOfStock) {
                       dispatch(addToCart({ product, count: 1 }));
                       dispatch(setDrawerOpen(true));
                     }
                   }}
                   sx={{ display: 'flex', flexDirection: 'column' }}
+                  disabled={isProductInCart || isOutOfStock}
                 >
                   <AddShoppingCartIcon />
                   <Typography variant='caption'>
-                    {product.quantity < 1
+                    {isOutOfStock
                       ? 'Out of stock'
                       : isProductInCart
                       ? 'Already in the cart'
