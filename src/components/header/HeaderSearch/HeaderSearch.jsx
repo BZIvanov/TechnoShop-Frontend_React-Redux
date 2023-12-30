@@ -37,7 +37,7 @@ const HeaderSearch = () => {
     >
       <InputBase
         sx={{ ml: 1, flex: 1 }}
-        placeholder='Search'
+        placeholder='Search for products'
         inputProps={{ 'aria-label': 'search' }}
         value={text}
         onChange={handleSearchChange}

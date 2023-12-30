@@ -54,6 +54,7 @@ const OrdersList = () => {
                   <TableCell align='center'>Delivery Address</TableCell>
                   <TableCell align='center'>Coupon</TableCell>
                   <TableCell align='center'>Order Status</TableCell>
+                  <TableCell align='center'>Download</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -67,7 +68,7 @@ const OrdersList = () => {
               >
                 {orders.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={isUserAdmin ? 8 : 7} align='center'>
+                    <TableCell colSpan={isUserAdmin ? 9 : 8} align='center'>
                       <Typography variant='body2'>
                         <strong>No orders found</strong>
                       </Typography>

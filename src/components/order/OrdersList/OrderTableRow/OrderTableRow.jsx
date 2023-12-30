@@ -13,8 +13,15 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { format, parseISO } from 'date-fns';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
-import { KeyboardArrowDownIcon, KeyboardArrowUpIcon } from '../../../mui/Icons';
+import {
+  KeyboardArrowDownIcon,
+  KeyboardArrowUpIcon,
+  DownloadIcon,
+  DownloadingIcon,
+} from '../../../mui/Icons';
+import PdfOrder from './PdfOrder/PdfOrder';
 import { currencyFormatter } from '../../../../utils/currencyFormatter';
 import { orderStatuses } from '../constants';
 
@@ -93,6 +100,20 @@ const OrderTableRow = ({ order, isAdminCell }) => {
           ) : (
             orderStatus
           )}
+        </TableCell>
+        <TableCell align='center'>
+          <PDFDownloadLink
+            document={<PdfOrder order={order} />}
+            fileName='Orders.pdf'
+          >
+            {({ loading }) => {
+              return (
+                <IconButton disabled={loading}>
+                  {loading ? <DownloadingIcon /> : <DownloadIcon />}
+                </IconButton>
+              );
+            }}
+          </PDFDownloadLink>
         </TableCell>
       </TableRow>
 

@@ -68,7 +68,7 @@ const ProductDetails = () => {
   };
 
   const isProductInCart = cartProduct !== undefined;
-  const isOutOfStock = product.quantity === 0;
+  const isOutOfStock = product?.quantity === 0;
 
   return (
     <>

@@ -11,6 +11,8 @@ import {
   Dashboard,
   Delete,
   Discount,
+  Download,
+  Downloading,
   Edit,
   Email,
   ExitToApp,
@@ -51,6 +53,8 @@ export const CloudUploadIcon = (props) => <CloudUpload {...props} />;
 export const DashboardIcon = (props) => <Dashboard {...props} />;
 export const DeleteIcon = (props) => <Delete {...props} />;
 export const DiscountIcon = (props) => <Discount {...props} />;
+export const DownloadIcon = (props) => <Download {...props} />;
+export const DownloadingIcon = (props) => <Downloading {...props} />;
 export const EditIcon = (props) => <Edit {...props} />;
 export const EmailIcon = (props) => <Email {...props} />;
 export const ExitToAppIcon = (props) => <ExitToApp {...props} />;
