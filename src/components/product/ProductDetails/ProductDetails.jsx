@@ -22,6 +22,7 @@ import {
   setDrawerOpen,
   selectCartProductById,
 } from '../../../providers/store/features/cart/cartSlice';
+import { useUpdateWishlistMutation } from '../../../providers/store/services/wishlists';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import RatingDialog from '../../common/dialogs/RatingDialog/RatingDialog';
 import ProductInfoTabs from './ProductInfoTabs/ProductInfoTabs';
@@ -50,6 +51,8 @@ const ProductDetails = () => {
   const { data: similarProductsData } = useGetSimilarProductsQuery(productId);
 
   const [rateProduct] = useRateProductMutation();
+
+  const [updateWishlist] = useUpdateWishlistMutation();
 
   useEffect(() => {
     // if the user previously rated the product use its rating
@@ -237,9 +240,8 @@ const ProductDetails = () => {
 
                 <Button
                   onClick={() => {
-                    // TODO
-                    // dispatch(addToWishlistAction(product._id));
-                    // navigate('/user/wishlist');
+                    updateWishlist(product._id);
+                    navigate('/user/wishlist');
                   }}
                   sx={{ display: 'flex', flexDirection: 'column' }}
                 >

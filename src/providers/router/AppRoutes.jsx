@@ -10,6 +10,7 @@ import LoginForm from '../../components/user/auth/LoginForm/LoginForm';
 import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
 import NavigationLayout from '../../components/user/layouts/NavigationLayout/NavigationLayout';
 import OrdersList from '../../components/order/OrdersList/OrdersList';
+import WishList from '../../components/wishlist/WishList/WishList';
 import PasswordUpdateForm from '../../components/user/auth/PasswordUpdateForm/PasswordUpdateForm';
 import ManageCategory from '../../components/category/ManageCategory/ManageCategory';
 import ManageSubcategory from '../../components/subcategory/ManageSubcategory/ManageSubcategory';
@@ -60,7 +61,7 @@ const AppRoutes = () => {
         }
       >
         <Route path='orders' element={<OrdersList />} />
-        <Route path='wishlist' element={<div>Wishlist</div>} />
+        <Route path='wishlist' element={<WishList />} />
         <Route path='password' element={<PasswordUpdateForm />} />
       </Route>
       <Route

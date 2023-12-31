@@ -29,7 +29,26 @@ export const ordersApi = api.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
     }),
+    updateOrderStatus: build.mutation({
+      query: (data) => {
+        const { id, ...body } = data;
+
+        return {
+          url: `/orders/${id}`,
+          method: 'PATCH',
+          body,
+          credentials: 'include',
+        };
+      },
+      invalidatesTags: (response, err, payload) => {
+        return [{ type: 'Orders', id: payload.id }];
+      },
+    }),
   }),
 });
 
-export const { useGetOrdersQuery, useCreateOrderMutation } = ordersApi;
+export const {
+  useGetOrdersQuery,
+  useCreateOrderMutation,
+  useUpdateOrderStatusMutation,
+} = ordersApi;

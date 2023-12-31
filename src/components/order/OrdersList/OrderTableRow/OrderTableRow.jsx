@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
@@ -15,6 +15,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { format, parseISO } from 'date-fns';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
+import { useDispatch } from '../../../../providers/store/store';
+import { useUpdateOrderStatusMutation } from '../../../../providers/store/services/orders';
+import { showNotification } from '../../../../providers/store/features/notification/notificationSlice';
 import {
   KeyboardArrowDownIcon,
   KeyboardArrowUpIcon,
@@ -23,9 +26,11 @@ import {
 } from '../../../mui/Icons';
 import PdfOrder from './PdfOrder/PdfOrder';
 import { currencyFormatter } from '../../../../utils/currencyFormatter';
-import { orderStatuses } from '../constants';
+import { orderStatuses } from '../../constants';
 
 const OrderTableRow = ({ order, isAdminCell }) => {
+  const dispatch = useDispatch();
+
   const [isRowExpanded, setIsRowExpanded] = useState(false);
 
   const {
@@ -39,6 +44,20 @@ const OrderTableRow = ({ order, isAdminCell }) => {
     products,
   } = order;
   const { name: couponName } = coupon || {};
+
+  const [updateOrderStatus, { isLoading, isSuccess }] =
+    useUpdateOrderStatusMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        showNotification({
+          type: 'success',
+          message: 'Order status updated successfully',
+        })
+      );
+    }
+  }, [dispatch, isSuccess]);
 
   return (
     <>
@@ -76,14 +95,12 @@ const OrderTableRow = ({ order, isAdminCell }) => {
                 variant='standard'
                 value={orderStatus}
                 onChange={(event) => {
-                  // TODO
-                  // dispatch(
-                  //   updateOrderStatusAction({
-                  //     orderId: _id,
-                  //     orderStatus: event.target.value,
-                  //   })
-                  // );
+                  updateOrderStatus({
+                    id: _id,
+                    orderStatus: event.target.value,
+                  });
                 }}
+                disabled={isLoading}
               >
                 {Object.keys(orderStatuses).map((orderStatusKey) => {
                   return (
@@ -118,7 +135,10 @@ const OrderTableRow = ({ order, isAdminCell }) => {
       </TableRow>
 
       <TableRow sx={{ '& > *': { borderBottom: 'unset', borderTop: 'unset' } }}>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
+        <TableCell
+          style={{ paddingBottom: 0, paddingTop: 0 }}
+          colSpan={isAdminCell ? 9 : 8}
+        >
           <Collapse in={isRowExpanded} timeout='auto' unmountOnExit={true}>
             <Box sx={{ margin: 1 }}>
               <Typography variant='body1' gutterBottom={true}>
