@@ -13,13 +13,14 @@ export const wishlistsApi = api.injectEndpoints({
       },
       providesTags: (result) => {
         const products = result?.products || [];
+
         return [
           ...products.map(({ _id }) => ({ type: 'Wishlists', id: _id })),
           { type: 'Wishlists', id: 'LIST' },
         ];
       },
     }),
-    updateWishlist: build.mutation({
+    addToWishlist: build.mutation({
       query: (id) => {
         return {
           url: `/wishlists/${id}`,
@@ -28,16 +29,27 @@ export const wishlistsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (response) => {
-        const products = response?.products || [];
-        return [
-          ...products.map(({ _id }) => ({ type: 'Wishlists', id: _id })),
-          { type: 'Wishlists', id: 'LIST' },
-        ];
+      invalidatesTags: () => {
+        return [{ type: 'Wishlists', id: 'LIST' }];
+      },
+    }),
+    removeFromWishlist: build.mutation({
+      query: (id) => {
+        return {
+          url: `/wishlists/${id}`,
+          method: 'DELETE',
+          credentials: 'include',
+        };
+      },
+      invalidatesTags: (response, err, payload) => {
+        return [{ type: 'Wishlists', id: payload }];
       },
     }),
   }),
 });
 
-export const { useGetWishlistProductsQuery, useUpdateWishlistMutation } =
-  wishlistsApi;
+export const {
+  useGetWishlistProductsQuery,
+  useAddToWishlistMutation,
+  useRemoveFromWishlistMutation,
+} = wishlistsApi;

@@ -22,7 +22,8 @@ import {
   setDrawerOpen,
   selectCartProductById,
 } from '../../../providers/store/features/cart/cartSlice';
-import { useUpdateWishlistMutation } from '../../../providers/store/services/wishlists';
+import { useAddToWishlistMutation } from '../../../providers/store/services/wishlists';
+import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import RatingDialog from '../../common/dialogs/RatingDialog/RatingDialog';
 import ProductInfoTabs from './ProductInfoTabs/ProductInfoTabs';
@@ -52,7 +53,19 @@ const ProductDetails = () => {
 
   const [rateProduct] = useRateProductMutation();
 
-  const [updateWishlist] = useUpdateWishlistMutation();
+  const [addToWishlist] = useAddToWishlistMutation();
+
+  const handleAddToWishlist = async () => {
+    const result = await addToWishlist(product._id);
+
+    if ('error' in result) {
+      navigate('/user/wishlist');
+    } else {
+      dispatch(
+        showNotification({ type: 'success', message: 'Added to the wishlist' })
+      );
+    }
+  };
 
   useEffect(() => {
     // if the user previously rated the product use its rating
@@ -239,10 +252,7 @@ const ProductDetails = () => {
                 </Button>
 
                 <Button
-                  onClick={() => {
-                    updateWishlist(product._id);
-                    navigate('/user/wishlist');
-                  }}
+                  onClick={handleAddToWishlist}
                   sx={{ display: 'flex', flexDirection: 'column' }}
                 >
                   <FavoriteIcon />

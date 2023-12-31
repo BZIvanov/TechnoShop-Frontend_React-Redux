@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 
 import {
   useGetWishlistProductsQuery,
-  useUpdateWishlistMutation,
+  useRemoveFromWishlistMutation,
 } from '../../../providers/store/services/wishlists';
 import { currencyFormatter } from '../../../utils/currencyFormatter';
 import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
@@ -24,7 +24,7 @@ const WishList = () => {
   const { data } = useGetWishlistProductsQuery();
   const products = data?.products || [];
 
-  const [updateWishlist, { isLoading }] = useUpdateWishlistMutation();
+  const [removeFromWishlist, { isLoading }] = useRemoveFromWishlistMutation();
 
   const [removeProductDialog, setRemoveProductDialog] = useState({
     open: false,
@@ -39,7 +39,7 @@ const WishList = () => {
       onConfirm: () => {},
     });
 
-    updateWishlist(productId);
+    removeFromWishlist(productId);
   };
 
   return (
