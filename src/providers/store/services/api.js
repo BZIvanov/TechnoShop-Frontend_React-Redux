@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:3100/v1',
+  baseUrl: import.meta.env.VITE_BACKEND_URL,
 });
 
 export const api = createApi({
   baseQuery,
-  tagTypes: ['Users', 'Categories', 'Subcategories'],
   endpoints: () => ({}),
 });
