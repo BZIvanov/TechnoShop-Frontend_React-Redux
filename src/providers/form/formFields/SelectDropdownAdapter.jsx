@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { useFormContext } from '../../hooks/useFormContext';
+import { useFormContext } from '../hooks/useFormContext';
 
 const SelectDropdownAdapter = ({
   name,

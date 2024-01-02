@@ -5,7 +5,7 @@ import ProtectedRoute from '../../components/user/route/ProtectedRoute/Protected
 import Home from '../../components/home/Home/Home';
 import Shop from '../../components/shop/Shop/Shop';
 import CartProducts from '../../components/cart/CartProducts/CartProducts';
-import RegisterForm from '../../components/user/auth/RegisterForm/RegisterForm';
+import RegisterForm from '../../components/user/auth/register/RegisterForm';
 import LoginForm from '../../components/user/auth/login/LoginForm';
 import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
 import NavigationLayout from '../../components/user/layouts/NavigationLayout/NavigationLayout';

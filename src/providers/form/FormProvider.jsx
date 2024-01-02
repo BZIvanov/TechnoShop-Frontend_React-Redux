@@ -12,7 +12,23 @@ const FormProvider = ({ methods, onSubmit, children }) => {
 };
 
 FormProvider.propTypes = {
-  methods: PropTypes.object,
+  methods: PropTypes.shape({
+    clearErrors: PropTypes.func,
+    control: PropTypes.object,
+    formState: PropTypes.object,
+    getFieldState: PropTypes.func,
+    getValues: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    register: PropTypes.func,
+    reset: PropTypes.func,
+    resetField: PropTypes.func,
+    setError: PropTypes.func,
+    setFocus: PropTypes.func,
+    setValue: PropTypes.func,
+    trigger: PropTypes.func,
+    unregister: PropTypes.func,
+    watch: PropTypes.func,
+  }),
   onSubmit: PropTypes.func,
   children: PropTypes.node,
 };

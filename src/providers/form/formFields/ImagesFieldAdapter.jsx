@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { useFormContext } from '../../hooks/useFormContext';
-import { CloudUploadIcon } from '../../../../components/mui/Icons';
+import { useFormContext } from '../hooks/useFormContext';
+import { CloudUploadIcon } from '../../../components/mui/Icons';
 
 const ImagesFieldAdapter = ({ name }) => {
   const { control } = useFormContext();

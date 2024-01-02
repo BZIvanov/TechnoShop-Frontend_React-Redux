@@ -8,13 +8,13 @@ import { useForm } from '../../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../../providers/form/formFields/TextFieldAdapter';
 import PasswordTextFieldAdapter from '../../../../providers/form/formFields/PasswordTextFieldAdapter';
 import { EmailIcon, FaceIcon } from '../../../mui/Icons';
-import { formConfig } from './form-schema';
+import { formConfig } from './registerForm.schema';
 
 const RegisterForm = () => {
   const [register, { isLoading }] = useRegisterMutation();
 
   const formMethods = useForm(formConfig);
-  const { formState, reset } = formMethods;
+  const { formState } = formMethods;
 
   const handleFormSubmit = (values) => {
     const { username, email, password } = values;
@@ -35,53 +35,30 @@ const RegisterForm = () => {
 
       <Box sx={{ width: { xs: '90%', sm: '290px' } }}>
         <FormProvider onSubmit={handleFormSubmit} methods={formMethods}>
-          <Box my={1}>
-            <TextFieldAdapter
-              name='username'
-              label='Username'
-              icon={<FaceIcon />}
-            />
-          </Box>
+          <TextFieldAdapter
+            name='username'
+            label='Username'
+            icon={<FaceIcon />}
+          />
 
-          <Box my={1}>
-            <TextFieldAdapter name='email' label='Email' icon={<EmailIcon />} />
-          </Box>
+          <TextFieldAdapter name='email' label='Email' icon={<EmailIcon />} />
 
-          <Box my={1}>
-            <PasswordTextFieldAdapter name='password' label='Password' />
-          </Box>
+          <PasswordTextFieldAdapter name='password' label='Password' />
 
-          <Box my={1}>
-            <PasswordTextFieldAdapter
-              name='confirmPassword'
-              label='Confirm Password'
-            />
-          </Box>
+          <PasswordTextFieldAdapter
+            name='confirmPassword'
+            label='Confirm Password'
+          />
 
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              marginTop: '20px',
-            }}
+          <Button
+            variant='contained'
+            type='submit'
+            disabled={formState.isSubmitting || isLoading}
+            fullWidth={true}
+            sx={{ marginTop: '20px' }}
           >
-            <Button
-              variant='contained'
-              color='secondary'
-              type='button'
-              onClick={() => reset()}
-              disabled={formState.submitting}
-            >
-              Reset
-            </Button>
-            <Button
-              variant='contained'
-              type='submit'
-              disabled={formState.submitting || isLoading}
-            >
-              Register
-            </Button>
-          </Box>
+            Register
+          </Button>
         </FormProvider>
       </Box>
     </Box>

@@ -5,7 +5,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-import { useFormContext } from '../../hooks/useFormContext';
+import { useFormContext } from '../hooks/useFormContext';
 
 const DatePickerFieldAdapter = ({ name, label, disablePast }) => {
   const { control } = useFormContext();

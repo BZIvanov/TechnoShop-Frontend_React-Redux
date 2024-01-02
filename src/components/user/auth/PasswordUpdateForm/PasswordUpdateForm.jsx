@@ -77,14 +77,14 @@ const PasswordUpdateForm = () => {
               color='secondary'
               type='button'
               onClick={() => reset()}
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               Reset
             </Button>
             <Button
               variant='contained'
               type='submit'
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               Submit
             </Button>

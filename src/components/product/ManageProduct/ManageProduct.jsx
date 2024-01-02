@@ -246,7 +246,7 @@ const ManageProduct = () => {
               onClick={() => {
                 reset();
               }}
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               Reset Form
             </Button>
@@ -254,7 +254,7 @@ const ManageProduct = () => {
               sx={{ marginLeft: '5px' }}
               variant='contained'
               type='submit'
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               {productId ? 'Update Product' : 'Create Product'}
             </Button>

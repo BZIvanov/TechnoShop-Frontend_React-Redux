@@ -96,7 +96,7 @@ const ManageCoupon = () => {
           <Button
             variant='contained'
             type='submit'
-            disabled={formState.submitting || loading}
+            disabled={formState.isSubmitting || loading}
           >
             Create Coupon
           </Button>

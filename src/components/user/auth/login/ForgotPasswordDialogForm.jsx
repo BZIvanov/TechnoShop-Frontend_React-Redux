@@ -65,14 +65,14 @@ const ForgotPasswordDialog = ({
               color='secondary'
               type='button'
               onClick={() => handleShowForgotModal(false)}
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               Cancel
             </Button>
             <Button
               color='secondary'
               type='submit'
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               Send
             </Button>

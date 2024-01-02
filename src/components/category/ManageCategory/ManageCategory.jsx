@@ -110,7 +110,7 @@ const ManageCategory = () => {
                 setSelectedCategory(null);
                 reset();
               }}
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               Reset form
             </Button>
@@ -118,7 +118,7 @@ const ManageCategory = () => {
               sx={{ marginLeft: '5px' }}
               variant='contained'
               type='submit'
-              disabled={formState.submitting || isLoading}
+              disabled={formState.isSubmitting || isLoading}
             >
               {selectedCategory ? 'Update category' : 'Create category'}
             </Button>

@@ -9,10 +9,10 @@ import TextField from '@mui/material/TextField';
 import {
   VisibilityIcon,
   VisibilityOffIcon,
-} from '../../../../components/mui/Icons';
-import { useFormContext } from '../../hooks/useFormContext';
+} from '../../../components/mui/Icons';
+import { useFormContext } from '../hooks/useFormContext';
 
-const PasswordTextFieldAdapter = ({ name, label }) => {
+const PasswordTextFieldAdapter = ({ name, label, styles }) => {
   const { control } = useFormContext();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +27,7 @@ const PasswordTextFieldAdapter = ({ name, label }) => {
       control={control}
       render={({ field, fieldState }) => {
         return (
-          <FormControl sx={{ width: '100%' }}>
+          <FormControl sx={{ width: '100%', marginBlock: 1, ...styles }}>
             <TextField
               type={showPassword ? 'text' : 'password'}
               inputProps={{ ...field }}
@@ -59,6 +59,7 @@ const PasswordTextFieldAdapter = ({ name, label }) => {
 PasswordTextFieldAdapter.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
+  styles: PropTypes.object,
 };
 
 export default PasswordTextFieldAdapter;

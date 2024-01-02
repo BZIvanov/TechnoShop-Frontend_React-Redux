@@ -8,7 +8,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 
-import { useFormContext } from '../../hooks/useFormContext';
+import { useFormContext } from '../hooks/useFormContext';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

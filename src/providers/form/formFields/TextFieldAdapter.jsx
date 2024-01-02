@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 
-import { useFormContext } from '../../hooks/useFormContext';
+import { useFormContext } from '../hooks/useFormContext';
 
 const TextFieldAdapter = ({
   name,

@@ -49,7 +49,7 @@ const LoginForm = () => {
           <Button
             variant='contained'
             type='submit'
-            disabled={formState.submitting || isLoading}
+            disabled={formState.isSubmitting || isLoading}
             fullWidth={true}
             sx={{ marginTop: '20px' }}
           >
