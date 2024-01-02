@@ -14,7 +14,7 @@ import FormProvider from '../../../../providers/form/FormProvider';
 import { useForm } from '../../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
 import { EmailIcon } from '../../../mui/Icons';
-import { formConfig } from './form-schema';
+import { formConfig } from './forgotPasswordDialogForm.schema';
 
 const ForgotPasswordDialog = ({
   showForgotPasswordModal,

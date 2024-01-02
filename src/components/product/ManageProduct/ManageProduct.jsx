@@ -26,7 +26,7 @@ import SelectDropdownMultichipAdapter from '../../../providers/form/form-fields/
 import ImagesFieldAdapter from '../../../providers/form/form-fields/ImagesFieldAdapter/ImagesFieldAdapter';
 import PreviewNewImageAvatar from '../../common/image-preview/PreviewNewImageAvatar/PreviewNewImageAvatar';
 import PreviewExistingImageAvatar from '../../common/image-preview/PreviewExistingImageAvatar/PreviewExistingImageAvatar';
-import { resizeImage } from '../../../utils/image-resizer';
+import { resizeImage } from '../../../utils/resizeImage';
 import { formConfig } from './form-schema';
 
 const ManageProduct = () => {

@@ -15,6 +15,7 @@ const TextFieldAdapter = ({
   maxRows,
   placeholder,
   icon,
+  styles = {},
 }) => {
   // After we provided the form methods to the FormProvider, we can now get them from the context
   const { control } = useFormContext();
@@ -25,7 +26,7 @@ const TextFieldAdapter = ({
       control={control}
       render={({ field, fieldState }) => {
         return (
-          <FormControl sx={{ width: '100%' }}>
+          <FormControl sx={{ width: '100%', marginBlock: 1, ...styles }}>
             <TextField
               inputProps={{ ...field, type }}
               variant='standard'
@@ -64,6 +65,7 @@ TextFieldAdapter.propTypes = {
   maxRows: PropTypes.number,
   placeholder: PropTypes.string,
   icon: PropTypes.element,
+  styles: PropTypes.object,
 };
 
 export default TextFieldAdapter;

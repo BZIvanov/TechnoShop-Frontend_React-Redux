@@ -9,8 +9,8 @@ import { useForm } from '../../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
 import PasswordTextFieldAdapter from '../../../../providers/form/form-fields/PasswordTextFieldAdapter/PasswordTextFieldAdapter';
 import { EmailIcon } from '../../../mui/Icons';
-import { formConfig } from './form-schema';
-import ForgotPasswordDialog from '../ForgotPasswordDialog/ForgotPasswordDialog';
+import { formConfig } from './loginForm.schema';
+import ForgotPasswordDialogForm from './ForgotPasswordDialogForm';
 
 const LoginForm = () => {
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
@@ -42,33 +42,28 @@ const LoginForm = () => {
 
       <Box sx={{ width: { xs: '90%', sm: '290px' } }}>
         <FormProvider onSubmit={handleFormSubmit} methods={formMethods}>
-          <Box my={1}>
-            <TextFieldAdapter name='email' label='Email' icon={<EmailIcon />} />
-          </Box>
+          <TextFieldAdapter name='email' label='Email' icon={<EmailIcon />} />
 
-          <Box my={1}>
-            <PasswordTextFieldAdapter name='password' label='Password' />
-          </Box>
+          <PasswordTextFieldAdapter name='password' label='Password' />
 
-          <Box sx={{ marginTop: '20px' }}>
-            <Button
-              variant='contained'
-              type='submit'
-              disabled={formState.submitting || isLoading}
-              fullWidth={true}
-            >
-              Login
-            </Button>
-          </Box>
+          <Button
+            variant='contained'
+            type='submit'
+            disabled={formState.submitting || isLoading}
+            fullWidth={true}
+            sx={{ marginTop: '20px' }}
+          >
+            Login
+          </Button>
         </FormProvider>
 
-        <Box sx={{ marginTop: '30px', textAlign: 'right' }}>
+        <Box sx={{ marginTop: '20px', textAlign: 'right' }}>
           <Button color='warning' onClick={() => handleShowForgotModal(true)}>
             Forgot Password?
           </Button>
         </Box>
 
-        <ForgotPasswordDialog
+        <ForgotPasswordDialogForm
           showForgotPasswordModal={showForgotPasswordModal}
           handleShowForgotModal={handleShowForgotModal}
         />
