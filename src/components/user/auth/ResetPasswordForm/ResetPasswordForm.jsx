@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { useResetPasswordMutation } from '../../../../providers/store/services/users';
 import FormProvider from '../../../../providers/form/FormProvider';
 import { useForm } from '../../../../providers/form/hooks/useForm';
-import PasswordTextFieldAdapter from '../../../../providers/form/form-fields/PasswordTextFieldAdapter/PasswordTextFieldAdapter';
+import PasswordTextFieldAdapter from '../../../../providers/form/formFields/PasswordTextFieldAdapter';
 import { formConfig } from './form-schema';
 
 const ResetPasswordForm = () => {

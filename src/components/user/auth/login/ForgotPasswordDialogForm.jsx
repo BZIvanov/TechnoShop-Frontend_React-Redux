@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 import { useForgotPasswordMutation } from '../../../../providers/store/services/users';
 import FormProvider from '../../../../providers/form/FormProvider';
 import { useForm } from '../../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
+import TextFieldAdapter from '../../../../providers/form/formFields/TextFieldAdapter';
 import { EmailIcon } from '../../../mui/Icons';
 import { formConfig } from './forgotPasswordDialogForm.schema';
 

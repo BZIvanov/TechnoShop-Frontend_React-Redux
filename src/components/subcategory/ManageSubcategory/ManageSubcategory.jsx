@@ -19,8 +19,8 @@ import { useSelector, useDispatch } from '../../../providers/store/store';
 import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
-import SelectDropdownAdapter from '../../../providers/form/form-fields/SelectDropdownAdapter/SelectDropdownAdapter';
+import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
+import SelectDropdownAdapter from '../../../providers/form/formFields/SelectDropdownAdapter';
 import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './form-schema';
 

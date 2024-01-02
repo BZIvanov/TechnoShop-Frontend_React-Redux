@@ -13,7 +13,7 @@ import {
 import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
+import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
 import { formConfig } from './form-schema';
 
 const Checkout = () => {

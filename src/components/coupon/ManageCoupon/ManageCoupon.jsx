@@ -16,8 +16,8 @@ import { format, parseISO } from 'date-fns';
 
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
-import DatePickerFieldAdapter from '../../../providers/form/form-fields/DatePickerFieldAdapter/DatePickerFieldAdapter';
+import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
+import DatePickerFieldAdapter from '../../../providers/form/formFields/DatePickerFieldAdapter';
 import {
   useGetCouponsQuery,
   useCreateCouponMutation,

@@ -5,8 +5,8 @@ import Button from '@mui/material/Button';
 import { useRegisterMutation } from '../../../../providers/store/services/users';
 import FormProvider from '../../../../providers/form/FormProvider';
 import { useForm } from '../../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../../providers/form/form-fields/TextFieldAdapter/TextFieldAdapter';
-import PasswordTextFieldAdapter from '../../../../providers/form/form-fields/PasswordTextFieldAdapter/PasswordTextFieldAdapter';
+import TextFieldAdapter from '../../../../providers/form/formFields/TextFieldAdapter';
+import PasswordTextFieldAdapter from '../../../../providers/form/formFields/PasswordTextFieldAdapter';
 import { EmailIcon, FaceIcon } from '../../../mui/Icons';
 import { formConfig } from './form-schema';
 

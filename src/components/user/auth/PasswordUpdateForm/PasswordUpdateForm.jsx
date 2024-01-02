@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert';
 import { useUpdatePasswordMutation } from '../../../../providers/store/services/users';
 import FormProvider from '../../../../providers/form/FormProvider';
 import { useForm } from '../../../../providers/form/hooks/useForm';
-import PasswordTextFieldAdapter from '../../../../providers/form/form-fields/PasswordTextFieldAdapter/PasswordTextFieldAdapter';
+import PasswordTextFieldAdapter from '../../../../providers/form/formFields/PasswordTextFieldAdapter';
 import { formConfig } from './form-schema';
 
 const PasswordUpdateForm = () => {
