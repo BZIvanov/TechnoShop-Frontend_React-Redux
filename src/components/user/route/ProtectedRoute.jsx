@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-import { useSelector } from '../../../../providers/store/store';
-import { selectUser } from '../../../../providers/store/features/user/userSlice';
-import CountdownProgress from '../../../common/feedback/CountdownProgress/CountdownProgress';
+import { useSelector } from '../../../providers/store/store';
+import { selectUser } from '../../../providers/store/features/user/userSlice';
+import CountdownProgress from '../../common/feedback/CountdownProgress';
 
 const ProtectedRoute = ({
   children,

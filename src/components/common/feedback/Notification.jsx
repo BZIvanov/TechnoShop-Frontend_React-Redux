@@ -1,13 +1,13 @@
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-import { useSelector, useDispatch } from '../../../../providers/store/store';
+import { useSelector, useDispatch } from '../../../providers/store/store';
 import {
   selectNotification,
   hideNotification,
-} from '../../../../providers/store/features/notification/notificationSlice';
+} from '../../../providers/store/features/notification/notificationSlice';
 
-const ApiNotification = () => {
+const Notification = () => {
   const dispatch = useDispatch();
 
   const { type, message } = useSelector(selectNotification);
@@ -34,4 +34,4 @@ const ApiNotification = () => {
   );
 };
 
-export default ApiNotification;
+export default Notification;

@@ -14,18 +14,18 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { format, parseISO } from 'date-fns';
 
-import FormProvider from '../../../providers/form/FormProvider';
-import { useForm } from '../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
-import DatePickerFieldAdapter from '../../../providers/form/formFields/DatePickerFieldAdapter';
+import FormProvider from '../../providers/form/FormProvider';
+import { useForm } from '../../providers/form/hooks/useForm';
+import TextFieldAdapter from '../../providers/form/formFields/TextFieldAdapter';
+import DatePickerFieldAdapter from '../../providers/form/formFields/DatePickerFieldAdapter';
 import {
   useGetCouponsQuery,
   useCreateCouponMutation,
   useDeleteCouponMutation,
-} from '../../../providers/store/services/coupons';
-import { DeleteIcon } from '../../mui/Icons';
-import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
-import { formConfig } from './form-schema';
+} from '../../providers/store/services/coupons';
+import { DeleteIcon } from '../mui/Icons';
+import ConfirmDialog from '../common/dialogs/ConfirmDialog/ConfirmDialog';
+import { formConfig } from './manageCouponForm.schema';
 
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 50];
 

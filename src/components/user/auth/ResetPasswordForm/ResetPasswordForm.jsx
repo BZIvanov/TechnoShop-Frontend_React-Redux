@@ -44,16 +44,12 @@ const ResetPasswordForm = () => {
 
       <Box sx={{ width: { xs: '90%', sm: '290px' } }}>
         <FormProvider onSubmit={handleFormSubmit} methods={formMethods}>
-          <Box my={1}>
-            <PasswordTextFieldAdapter name='newPassword' label='New Password' />
-          </Box>
+          <PasswordTextFieldAdapter name='newPassword' label='New Password' />
 
-          <Box my={1}>
-            <PasswordTextFieldAdapter
-              name='confirmNewPassword'
-              label='Confirm New Password'
-            />
-          </Box>
+          <PasswordTextFieldAdapter
+            name='confirmNewPassword'
+            label='Confirm New Password'
+          />
 
           <Box
             sx={{
@@ -69,7 +65,7 @@ const ResetPasswordForm = () => {
               onClick={() => reset()}
               disabled={formState.isSubmitting || isLoading}
             >
-              Reset
+              Reset Form
             </Button>
             <Button
               variant='contained'

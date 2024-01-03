@@ -15,10 +15,10 @@ import IconButton from '@mui/material/IconButton';
 import {
   useGetWishlistProductsQuery,
   useRemoveFromWishlistMutation,
-} from '../../../providers/store/services/wishlists';
-import { currencyFormatter } from '../../../utils/currencyFormatter';
-import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
-import { DeleteIcon } from '../../mui/Icons';
+} from '../../providers/store/services/wishlists';
+import { currencyFormatter } from '../../utils/currencyFormatter';
+import ConfirmDialog from '../common/dialogs/ConfirmDialog/ConfirmDialog';
+import { DeleteIcon } from '../mui/Icons';
 
 const WishList = () => {
   const { data } = useGetWishlistProductsQuery();

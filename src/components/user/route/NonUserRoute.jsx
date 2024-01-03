@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useSelector } from '../../../../providers/store/store';
-import { selectUser } from '../../../../providers/store/features/user/userSlice';
+import { useSelector } from '../../../providers/store/store';
+import { selectUser } from '../../../providers/store/features/user/userSlice';
 
 const NonUserRoute = ({ children }) => {
   const location = useLocation();

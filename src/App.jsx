@@ -4,7 +4,7 @@ import Header from './components/header/Header/Header';
 import AppRoutes from './providers/router/AppRoutes';
 import { useGetCurrentUserQuery } from './providers/store/services/users';
 import CartDrawer from './components/cart/CartDrawer/CartDrawer';
-import ApiNotification from './components/common/feedback/ApiNotification/ApiNotification';
+import Notification from './components/common/feedback/Notification';
 
 const App = () => {
   // populate current user info in redux on page reload
@@ -18,7 +18,7 @@ const App = () => {
 
       <CartDrawer />
 
-      <ApiNotification />
+      <Notification />
     </Container>
   );
 };

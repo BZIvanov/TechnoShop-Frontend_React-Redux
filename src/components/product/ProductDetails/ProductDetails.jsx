@@ -56,6 +56,14 @@ const ProductDetails = () => {
   const [addToWishlist] = useAddToWishlistMutation();
 
   const handleAddToWishlist = async () => {
+    if (!user) {
+      return navigate('/login', {
+        state: {
+          customNavigateTo: `/product/${productId}`,
+        },
+      });
+    }
+
     const result = await addToWishlist(product._id);
 
     if ('error' in result) {

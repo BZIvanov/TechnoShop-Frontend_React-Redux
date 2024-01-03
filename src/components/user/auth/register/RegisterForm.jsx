@@ -14,7 +14,7 @@ const RegisterForm = () => {
   const [register, { isLoading }] = useRegisterMutation();
 
   const formMethods = useForm(formConfig);
-  const { formState } = formMethods;
+  const { formState, reset } = formMethods;
 
   const handleFormSubmit = (values) => {
     const { username, email, password } = values;
@@ -50,15 +50,30 @@ const RegisterForm = () => {
             label='Confirm Password'
           />
 
-          <Button
-            variant='contained'
-            type='submit'
-            disabled={formState.isSubmitting || isLoading}
-            fullWidth={true}
-            sx={{ marginTop: '20px' }}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              marginTop: '20px',
+            }}
           >
-            Register
-          </Button>
+            <Button
+              variant='contained'
+              color='secondary'
+              type='button'
+              onClick={() => reset()}
+              disabled={formState.isSubmitting}
+            >
+              Reset
+            </Button>
+            <Button
+              variant='contained'
+              type='submit'
+              disabled={formState.isSubmitting || isLoading}
+            >
+              Register
+            </Button>
+          </Box>
         </FormProvider>
       </Box>
     </Box>

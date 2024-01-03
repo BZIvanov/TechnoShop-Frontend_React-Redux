@@ -50,20 +50,14 @@ const PasswordUpdateForm = () => {
 
       <Box sx={{ width: { xs: '90%', sm: '290px' } }}>
         <FormProvider onSubmit={handleFormSubmit} methods={formMethods}>
-          <Box my={1}>
-            <PasswordTextFieldAdapter name='oldPassword' label='Old Password' />
-          </Box>
+          <PasswordTextFieldAdapter name='oldPassword' label='Old Password' />
 
-          <Box my={1}>
-            <PasswordTextFieldAdapter name='newPassword' label='New Password' />
-          </Box>
+          <PasswordTextFieldAdapter name='newPassword' label='New Password' />
 
-          <Box my={1}>
-            <PasswordTextFieldAdapter
-              name='confirmNewPassword'
-              label='Confirm New Password'
-            />
-          </Box>
+          <PasswordTextFieldAdapter
+            name='confirmNewPassword'
+            label='Confirm New Password'
+          />
 
           <Box
             sx={{
@@ -79,14 +73,14 @@ const PasswordUpdateForm = () => {
               onClick={() => reset()}
               disabled={formState.isSubmitting || isLoading}
             >
-              Reset
+              Reset Form
             </Button>
             <Button
               variant='contained'
               type='submit'
               disabled={formState.isSubmitting || isLoading}
             >
-              Submit
+              Update Password
             </Button>
           </Box>
         </FormProvider>
