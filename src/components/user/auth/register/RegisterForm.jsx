@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -62,17 +63,24 @@ const RegisterForm = () => {
               color='secondary'
               type='button'
               onClick={() => reset()}
-              disabled={formState.isSubmitting}
+              disabled={formState.isSubmitting || isLoading}
             >
-              Reset
+              Reset Form
             </Button>
             <Button
               variant='contained'
               type='submit'
               disabled={formState.isSubmitting || isLoading}
+              sx={{ flexGrow: 1, marginLeft: 1 }}
             >
               Register
             </Button>
+          </Box>
+
+          <Box sx={{ marginTop: '20px', textAlign: 'center' }}>
+            <Typography variant='body2'>
+              Already have an account? <Link to='/login'>Login</Link>
+            </Typography>
           </Box>
         </FormProvider>
       </Box>

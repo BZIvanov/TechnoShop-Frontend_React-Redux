@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 
-import Header from './components/header/Header/Header';
+import Header from './components/header/Header';
 import AppRoutes from './providers/router/AppRoutes';
 import { useGetCurrentUserQuery } from './providers/store/services/users';
 import CartDrawer from './components/cart/CartDrawer/CartDrawer';

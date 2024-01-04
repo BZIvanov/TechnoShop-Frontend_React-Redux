@@ -4,9 +4,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
 
-import { useLogoutMutation } from '../../../providers/store/services/users';
-import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
-import HeaderSearch from '../HeaderSearch/HeaderSearch';
+import { useSelector } from '../../providers/store/store';
+import { selectUser } from '../../providers/store/features/user/userSlice';
+import { selectCart } from '../../providers/store/features/cart/cartSlice';
+import { useLogoutMutation } from '../../providers/store/services/users';
 import {
   AddBusinessIcon,
   AddShoppingCartIcon,
@@ -15,10 +16,9 @@ import {
   HomeIcon,
   LoginIcon,
   PersonAddIcon,
-} from '../../mui/Icons';
-import { useSelector } from '../../../providers/store/store';
-import { selectUser } from '../../../providers/store/features/user/userSlice';
-import { selectCart } from '../../../providers/store/features/cart/cartSlice';
+} from '../mui/Icons';
+import HeaderNavLink from './HeaderNavLink';
+import HeaderSearch from './HeaderSearch';
 
 const Header = () => {
   const user = useSelector(selectUser);

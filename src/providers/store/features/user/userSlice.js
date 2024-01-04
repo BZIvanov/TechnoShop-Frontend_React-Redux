@@ -4,7 +4,6 @@ import { usersApi } from '../../services/users';
 
 const initialState = {
   user: null,
-  error: '',
 };
 
 const userSlice = createSlice({

@@ -3,12 +3,12 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 
-import { useSelector, useDispatch } from '../../../providers/store/store';
+import { useSelector, useDispatch } from '../../providers/store/store';
 import {
   selectTextFilter,
   changeFilter,
-} from '../../../providers/store/features/productsFilters/productsFiltersSlice';
-import { SearchIcon } from '../../mui/Icons';
+} from '../../providers/store/features/productsFilters/productsFiltersSlice';
+import { SearchIcon } from '../mui/Icons';
 
 const HeaderSearch = () => {
   const navigate = useNavigate();
