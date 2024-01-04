@@ -16,7 +16,7 @@ import {
   useGetCategoriesQuery,
   useGetCategorySubcategoriesQuery,
 } from '../../../providers/store/services/categories';
-import { useSelector, useDispatch } from '../../../providers/store/store';
+import { useDispatch } from '../../../providers/store/store';
 import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
@@ -28,6 +28,7 @@ import PreviewNewImageAvatar from '../../common/image-preview/PreviewNewImageAva
 import PreviewExistingImageAvatar from '../../common/image-preview/PreviewExistingImageAvatar/PreviewExistingImageAvatar';
 import { resizeImage } from '../../../utils/resizeImage';
 import { formConfig } from './form-schema';
+import { useIsApiRequestPending } from '../../../hooks/useIsApiRequestPending';
 
 const ManageProduct = () => {
   const dispatch = useDispatch();
@@ -148,16 +149,7 @@ const ManageProduct = () => {
     setExistingImages(filteredImages);
   };
 
-  // check for any pending query or mutation
-  const isLoading = useSelector((state) => {
-    const isSomeQueryPending = Object.values(state.api.queries).some(
-      (query) => query.status === 'pending'
-    );
-    const isSomeMutationPending = Object.values(state.api.mutations).some(
-      (mutation) => mutation.status === 'pending'
-    );
-    return isSomeQueryPending || isSomeMutationPending;
-  });
+  const isLoading = useIsApiRequestPending();
 
   return (
     <Box sx={{ padding: (theme) => theme.spacing(1) }}>

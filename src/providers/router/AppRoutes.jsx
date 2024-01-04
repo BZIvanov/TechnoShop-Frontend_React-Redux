@@ -7,11 +7,11 @@ import Shop from '../../components/shop/Shop/Shop';
 import CartProducts from '../../components/cart/CartProducts/CartProducts';
 import RegisterForm from '../../components/user/auth/register/RegisterForm';
 import LoginForm from '../../components/user/auth/login/LoginForm';
-import ResetPasswordForm from '../../components/user/auth/ResetPasswordForm/ResetPasswordForm';
+import PasswordResetForm from '../../components/user/auth/PasswordResetForm';
 import NavigationLayout from '../../components/user/layouts/NavigationLayout';
 import OrdersList from '../../components/order/OrdersList/OrdersList';
 import WishList from '../../components/wishlist/WishList';
-import PasswordUpdateForm from '../../components/user/auth/PasswordUpdateForm/PasswordUpdateForm';
+import PasswordUpdateForm from '../../components/user/auth/PasswordUpdateForm';
 import ManageCategory from '../../components/category/ManageCategory/ManageCategory';
 import ManageSubcategory from '../../components/subcategory/ManageSubcategory/ManageSubcategory';
 import ManageProduct from '../../components/product/ManageProduct/ManageProduct';
@@ -20,7 +20,7 @@ import ProductDetails from '../../components/product/ProductDetails/ProductDetai
 import ManageCoupon from '../../components/coupon/ManageCoupon';
 import CategoryProducts from '../../components/category/CategoryProducts/CategoryProducts';
 import SubcategoryProducts from '../../components/subcategory/SubcategoryProducts/SubcategoryProducts';
-import Checkout from '../../components/checkout/Checkout/Checkout';
+import Checkout from '../../components/checkout/Checkout';
 
 const AppRoutes = () => {
   return (
@@ -48,7 +48,7 @@ const AppRoutes = () => {
         path='/reset-password/:token'
         element={
           <NonUserRoute>
-            <ResetPasswordForm />
+            <PasswordResetForm />
           </NonUserRoute>
         }
       />

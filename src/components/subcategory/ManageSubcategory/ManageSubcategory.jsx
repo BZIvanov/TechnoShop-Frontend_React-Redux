@@ -15,7 +15,7 @@ import {
   useUpdateSubcategoryMutation,
   useDeleteSubcategoryMutation,
 } from '../../../providers/store/services/subcategories';
-import { useSelector, useDispatch } from '../../../providers/store/store';
+import { useDispatch } from '../../../providers/store/store';
 import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
@@ -23,6 +23,7 @@ import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapte
 import SelectDropdownAdapter from '../../../providers/form/formFields/SelectDropdownAdapter';
 import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './form-schema';
+import { useIsApiRequestPending } from '../../../hooks/useIsApiRequestPending';
 
 const ManageSubcategory = () => {
   const dispatch = useDispatch();
@@ -41,15 +42,7 @@ const ManageSubcategory = () => {
   const [updateSubcategory] = useUpdateSubcategoryMutation();
   const [deleteSubcategory] = useDeleteSubcategoryMutation();
 
-  const isLoading = useSelector((state) => {
-    const isSomeQueryPending = Object.values(state.api.queries).some(
-      (query) => query.status === 'pending'
-    );
-    const isSomeMutationPending = Object.values(state.api.mutations).some(
-      (mutation) => mutation.status === 'pending'
-    );
-    return isSomeQueryPending || isSomeMutationPending;
-  });
+  const isLoading = useIsApiRequestPending();
 
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;

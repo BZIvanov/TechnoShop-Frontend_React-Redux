@@ -14,13 +14,14 @@ import {
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
 } from '../../../providers/store/services/categories';
-import { useSelector, useDispatch } from '../../../providers/store/store';
+import { useDispatch } from '../../../providers/store/store';
 import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
 import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './form-schema';
+import { useIsApiRequestPending } from '../../../hooks/useIsApiRequestPending';
 
 const ManageCategory = () => {
   const dispatch = useDispatch();
@@ -39,15 +40,7 @@ const ManageCategory = () => {
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
 
-  const isLoading = useSelector((state) => {
-    const isSomeQueryPending = Object.values(state.api.queries).some(
-      (query) => query.status === 'pending'
-    );
-    const isSomeMutationPending = Object.values(state.api.mutations).some(
-      (mutation) => mutation.status === 'pending'
-    );
-    return isSomeQueryPending || isSomeMutationPending;
-  });
+  const isLoading = useIsApiRequestPending();
 
   const formMethods = useForm(formConfig);
   const { formState, reset, setValue } = formMethods;

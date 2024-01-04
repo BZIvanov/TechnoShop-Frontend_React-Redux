@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { useSelector } from '../../providers/store/store';
 import { selectUser } from '../../providers/store/features/user/userSlice';
@@ -19,6 +20,7 @@ import {
 } from '../mui/Icons';
 import HeaderNavLink from './HeaderNavLink';
 import HeaderSearch from './HeaderSearch';
+import { useIsApiRequestPending } from '../../hooks/useIsApiRequestPending';
 
 const Header = () => {
   const user = useSelector(selectUser);
@@ -29,6 +31,8 @@ const Header = () => {
   const handleLogout = () => {
     logout();
   };
+
+  const isApiLoading = useIsApiRequestPending();
 
   return (
     <>
@@ -100,6 +104,16 @@ const Header = () => {
             </Box>
           </Toolbar>
         </Container>
+
+        {isApiLoading && (
+          <Box sx={{ width: '100%' }}>
+            <LinearProgress
+              variant='indeterminate'
+              color='secondary'
+              sx={{ height: '2px' }}
+            />
+          </Box>
+        )}
       </AppBar>
 
       {/* Render second toolbar so the page content won't hide behind the first ttolbar  */}

@@ -1,40 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 
-import { useUpdatePasswordMutation } from '../../../../providers/store/services/users';
-import FormProvider from '../../../../providers/form/FormProvider';
-import { useForm } from '../../../../providers/form/hooks/useForm';
-import PasswordTextFieldAdapter from '../../../../providers/form/formFields/PasswordTextFieldAdapter';
-import { formConfig } from './form-schema';
+import { useResetPasswordMutation } from '../../../providers/store/services/users';
+import FormProvider from '../../../providers/form/FormProvider';
+import { useForm } from '../../../providers/form/hooks/useForm';
+import PasswordTextFieldAdapter from '../../../providers/form/formFields/PasswordTextFieldAdapter';
+import { formConfig } from './passwordResetForm.schema';
 
-const PasswordUpdateForm = () => {
-  const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
+const PasswordResetForm = () => {
+  const navigate = useNavigate();
 
-  const [updatePassword, { isLoading, isSuccess }] =
-    useUpdatePasswordMutation();
+  const { token } = useParams();
+
+  const [resetPassword, { isLoading, isSuccess }] = useResetPasswordMutation();
 
   const formMethods = useForm(formConfig);
   const { formState, reset } = formMethods;
 
   const handleFormSubmit = (values) => {
-    const { newPassword, oldPassword } = values;
-    updatePassword({ newPassword, oldPassword });
+    resetPassword({ ...values, token });
   };
 
   useEffect(() => {
     if (isSuccess) {
-      setIsPasswordUpdated(true);
-      reset();
+      navigate('/login');
     }
-  }, [isSuccess, reset]);
-
-  const handleCloseAlert = () => {
-    setIsPasswordUpdated(false);
-  };
+  }, [isSuccess, navigate]);
 
   return (
     <Box
@@ -46,12 +40,10 @@ const PasswordUpdateForm = () => {
         marginTop: { xs: '10px', sm: '20px', md: '40px' },
       }}
     >
-      <Typography variant='h5'>Password Update Form</Typography>
+      <Typography variant='h5'>Password Reset Form</Typography>
 
       <Box sx={{ width: { xs: '90%', sm: '290px' } }}>
         <FormProvider onSubmit={handleFormSubmit} methods={formMethods}>
-          <PasswordTextFieldAdapter name='oldPassword' label='Old Password' />
-
           <PasswordTextFieldAdapter name='newPassword' label='New Password' />
 
           <PasswordTextFieldAdapter
@@ -80,24 +72,13 @@ const PasswordUpdateForm = () => {
               type='submit'
               disabled={formState.isSubmitting || isLoading}
             >
-              Update Password
+              Reset Password
             </Button>
           </Box>
         </FormProvider>
       </Box>
-
-      <Snackbar
-        open={isPasswordUpdated}
-        autoHideDuration={3000}
-        onClose={handleCloseAlert}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert onClose={handleCloseAlert} severity='success'>
-          Password Updated Successfully
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };
 
-export default PasswordUpdateForm;
+export default PasswordResetForm;

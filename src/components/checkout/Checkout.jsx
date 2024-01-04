@@ -4,17 +4,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-import { useSelector, useDispatch } from '../../../providers/store/store';
-import { useCreateOrderMutation } from '../../../providers/store/services/orders';
+import { useSelector, useDispatch } from '../../providers/store/store';
+import { useCreateOrderMutation } from '../../providers/store/services/orders';
 import {
   selectCart,
   clearCart,
-} from '../../../providers/store/features/cart/cartSlice';
-import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
-import FormProvider from '../../../providers/form/FormProvider';
-import { useForm } from '../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
-import { formConfig } from './form-schema';
+} from '../../providers/store/features/cart/cartSlice';
+import { showNotification } from '../../providers/store/features/notification/notificationSlice';
+import FormProvider from '../../providers/form/FormProvider';
+import { useForm } from '../../providers/form/hooks/useForm';
+import TextFieldAdapter from '../../providers/form/formFields/TextFieldAdapter';
+import { formConfig } from './checkoutForm.schema';
 
 const Checkout = () => {
   const navigate = useNavigate();
