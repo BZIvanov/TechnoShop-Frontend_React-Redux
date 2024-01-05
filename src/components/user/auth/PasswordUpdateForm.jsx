@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 
+import { useDispatch } from '../../../providers/store/store';
 import { useUpdatePasswordMutation } from '../../../providers/store/services/users';
+import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
 import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import PasswordTextFieldAdapter from '../../../providers/form/formFields/PasswordTextFieldAdapter';
 import { formConfig } from './passwordUpdateForm.schema';
 
 const PasswordUpdateForm = () => {
-  const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
+  const dispatch = useDispatch();
 
   const [updatePassword, { isLoading, isSuccess }] =
     useUpdatePasswordMutation();
@@ -27,14 +27,15 @@ const PasswordUpdateForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setIsPasswordUpdated(true);
+      dispatch(
+        showNotification({
+          type: 'success',
+          message: 'Password updated successfully',
+        })
+      );
       reset();
     }
-  }, [isSuccess, reset]);
-
-  const handleCloseAlert = () => {
-    setIsPasswordUpdated(false);
-  };
+  }, [dispatch, isSuccess, reset]);
 
   return (
     <Box
@@ -85,17 +86,6 @@ const PasswordUpdateForm = () => {
           </Box>
         </FormProvider>
       </Box>
-
-      <Snackbar
-        open={isPasswordUpdated}
-        autoHideDuration={3000}
-        onClose={handleCloseAlert}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert onClose={handleCloseAlert} severity='success'>
-          Password Updated Successfully
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };
