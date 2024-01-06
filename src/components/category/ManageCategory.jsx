@@ -19,20 +19,17 @@ import { showNotification } from '../../providers/store/features/notification/no
 import FormProvider from '../../providers/form/FormProvider';
 import { useForm } from '../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../providers/form/formFields/TextFieldAdapter';
+import { useConfirmDialog } from '../../contexts/useConfirmDialogContext';
 import { useIsApiRequestPending } from '../../hooks/useIsApiRequestPending';
-import ConfirmDialog from '../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './manageCategoryForm.schema';
 
 const ManageCategory = () => {
   const dispatch = useDispatch();
 
+  const { openDialog, closeDialog } = useConfirmDialog();
+
   const [selectedCategory, setSelectedCategory] = useState(null);
-  // TODO rewrite the confirm dialog with createConext or redux or something like that
-  const [removeCategoryDialog, setRemoveCategoryDialog] = useState({
-    open: false,
-    text: '',
-    onConfirm: () => {},
-  });
+
   const [filterCategoryText, setFilterCategoryText] = useState('');
 
   const { data } = useGetCategoriesQuery();
@@ -75,11 +72,7 @@ const ManageCategory = () => {
   };
 
   const handleCategoryDelete = (categoryId) => () => {
-    setRemoveCategoryDialog({
-      open: false,
-      text: '',
-      onConfirm: () => {},
-    });
+    closeDialog();
 
     deleteCategory(categoryId);
 
@@ -151,8 +144,7 @@ const ManageCategory = () => {
                     setSelectedCategory({ _id, name });
                   }}
                   onDelete={() =>
-                    setRemoveCategoryDialog({
-                      open: true,
+                    openDialog({
                       text: 'Are you sure you want to delete this category?',
                       onConfirm: handleCategoryDelete(_id),
                     })
@@ -166,11 +158,6 @@ const ManageCategory = () => {
           </Typography>
         )}
       </Paper>
-
-      <ConfirmDialog
-        dialogConfig={removeCategoryDialog}
-        setDialogConfig={setRemoveCategoryDialog}
-      />
     </Box>
   );
 };

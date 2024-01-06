@@ -5,25 +5,21 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
-const ConfirmDialog = ({
-  dialogConfig: { open, text, onConfirm },
-  setDialogConfig,
-}) => {
+import { useConfirmDialog } from '../../../../contexts/useConfirmDialogContext';
+
+const ConfirmDialog = () => {
+  const { dialogConfig, closeDialog } = useConfirmDialog();
+
+  const { open, text, onConfirm } = dialogConfig;
+
   return (
-    <Dialog
-      open={open}
-      onClose={() => setDialogConfig({ text, onConfirm, open: false })}
-    >
+    <Dialog open={open} onClose={closeDialog}>
       <DialogContent>
         <DialogContentText>{text}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={() => setDialogConfig({ text, onConfirm, open: false })}
-        >
-          Cancel
-        </Button>
-        <Button onClick={() => onConfirm()} autoFocus={true}>
+        <Button onClick={closeDialog}>Cancel</Button>
+        <Button onClick={onConfirm} autoFocus={true}>
           Continue
         </Button>
       </DialogActions>

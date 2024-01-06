@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,8 +15,8 @@ import {
   useGetWishlistProductsQuery,
   useRemoveFromWishlistMutation,
 } from '../../providers/store/services/wishlists';
+import { useConfirmDialog } from '../../contexts/useConfirmDialogContext';
 import { currencyFormatter } from '../../utils/currencyFormatter';
-import ConfirmDialog from '../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { DeleteIcon } from '../mui/Icons';
 
 const WishList = () => {
@@ -26,18 +25,10 @@ const WishList = () => {
 
   const [removeFromWishlist, { isLoading }] = useRemoveFromWishlistMutation();
 
-  const [removeProductDialog, setRemoveProductDialog] = useState({
-    open: false,
-    text: '',
-    onConfirm: () => {},
-  });
+  const { openDialog, closeDialog } = useConfirmDialog();
 
   const handleProductDelete = (productId) => () => {
-    setRemoveProductDialog({
-      open: false,
-      text: '',
-      onConfirm: () => {},
-    });
+    closeDialog();
 
     removeFromWishlist(productId);
   };
@@ -81,8 +72,7 @@ const WishList = () => {
                             <IconButton
                               size='small'
                               onClick={() =>
-                                setRemoveProductDialog({
-                                  open: true,
+                                openDialog({
                                   text: 'Are you sure you want to delete this product?',
                                   onConfirm: handleProductDelete(_id),
                                 })
@@ -110,11 +100,6 @@ const WishList = () => {
           </TableContainer>
         </Paper>
       </Box>
-
-      <ConfirmDialog
-        dialogConfig={removeProductDialog}
-        setDialogConfig={setRemoveProductDialog}
-      />
     </Box>
   );
 };

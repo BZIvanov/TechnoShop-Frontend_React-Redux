@@ -21,7 +21,7 @@ import FormProvider from '../../../providers/form/FormProvider';
 import { useForm } from '../../../providers/form/hooks/useForm';
 import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
 import SelectDropdownAdapter from '../../../providers/form/formFields/SelectDropdownAdapter';
-import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
+import { useConfirmDialog } from '../../../contexts/useConfirmDialogContext';
 import { formConfig } from './form-schema';
 import { useIsApiRequestPending } from '../../../hooks/useIsApiRequestPending';
 
@@ -29,12 +29,9 @@ const ManageSubcategory = () => {
   const dispatch = useDispatch();
 
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [removeSubcategoryDialog, setRemoveSubcategoryDialog] = useState({
-    open: false,
-    text: '',
-    onConfirm: () => {},
-  });
   const [filterSubcategoryText, setFilterSubcategoryText] = useState('');
+
+  const { openDialog, closeDialog } = useConfirmDialog();
 
   const { data } = useGetCategoriesQuery();
   const categories = data?.categories || [];
@@ -77,11 +74,7 @@ const ManageSubcategory = () => {
   };
 
   const handleSubcategoryDelete = (subcategoryId) => () => {
-    setRemoveSubcategoryDialog({
-      open: false,
-      text: '',
-      onConfirm: () => {},
-    });
+    closeDialog();
 
     deleteSubcategory(subcategoryId);
 
@@ -164,8 +157,7 @@ const ManageSubcategory = () => {
                     setSelectedSubcategory({ _id, name, categoryId });
                   }}
                   onDelete={() =>
-                    setRemoveSubcategoryDialog({
-                      open: true,
+                    openDialog({
                       text: 'Are you sure you want to delete this subcategory?',
                       onConfirm: handleSubcategoryDelete(_id),
                     })
@@ -179,11 +171,6 @@ const ManageSubcategory = () => {
           </Typography>
         )}
       </Paper>
-
-      <ConfirmDialog
-        dialogConfig={removeSubcategoryDialog}
-        setDialogConfig={setRemoveSubcategoryDialog}
-      />
     </Box>
   );
 };

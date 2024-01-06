@@ -23,8 +23,8 @@ import {
   useCreateCouponMutation,
   useDeleteCouponMutation,
 } from '../../providers/store/services/coupons';
+import { useConfirmDialog } from '../../contexts/useConfirmDialogContext';
 import { DeleteIcon } from '../mui/Icons';
-import ConfirmDialog from '../common/dialogs/ConfirmDialog/ConfirmDialog';
 import { formConfig } from './manageCouponForm.schema';
 
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 50];
@@ -32,6 +32,8 @@ const ROWS_PER_PAGE_OPTIONS = [10, 25, 50];
 const ManageCoupon = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(ROWS_PER_PAGE_OPTIONS[0]);
+
+  const { openDialog, closeDialog } = useConfirmDialog();
 
   const { data } = useGetCouponsQuery({ page, perPage: rowsPerPage });
   const { coupons = [], totalCount = 0 } = data || {};
@@ -46,18 +48,8 @@ const ManageCoupon = () => {
     reset();
   };
 
-  const [removeCouponDialog, setRemoveCouponDialog] = useState({
-    open: false,
-    text: '',
-    onConfirm: () => {},
-  });
-
   const handleCouponDelete = (couponId) => () => {
-    setRemoveCouponDialog({
-      open: false,
-      text: '',
-      onConfirm: () => {},
-    });
+    closeDialog();
 
     deleteCoupon(couponId);
   };
@@ -137,8 +129,7 @@ const ManageCoupon = () => {
                           <IconButton
                             size='small'
                             onClick={() => {
-                              setRemoveCouponDialog({
-                                open: true,
+                              openDialog({
                                 text: 'Are you sure you want to delete this coupon?',
                                 onConfirm: handleCouponDelete(_id),
                               });
@@ -169,11 +160,6 @@ const ManageCoupon = () => {
           />
         </Paper>
       </Box>
-
-      <ConfirmDialog
-        dialogConfig={removeCouponDialog}
-        setDialogConfig={setRemoveCouponDialog}
-      />
     </Box>
   );
 };

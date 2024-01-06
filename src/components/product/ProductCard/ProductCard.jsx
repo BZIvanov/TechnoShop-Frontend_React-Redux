@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -19,6 +18,7 @@ import {
   setDrawerOpen,
   selectCartProductById,
 } from '../../../providers/store/features/cart/cartSlice';
+import { useConfirmDialog } from '../../../contexts/useConfirmDialogContext';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import {
   EditIcon,
@@ -26,7 +26,6 @@ import {
   PreviewIcon,
   AddShoppingCartIcon,
 } from '../../mui/Icons';
-import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
 import ProductImage from '../../../assets/images/product.png';
 
 const ProductCard = ({ product }) => {
@@ -34,6 +33,8 @@ const ProductCard = ({ product }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { openDialog, closeDialog } = useConfirmDialog();
 
   const [deleteProduct] = useDeleteProductMutation();
 
@@ -44,18 +45,9 @@ const ProductCard = ({ product }) => {
   const isProductInCart = cartProduct !== undefined;
   const isOutOfStock = quantity === 0;
 
-  const [removeProductDialog, setRemoveProductDialog] = useState({
-    open: false,
-    text: '',
-    onConfirm: () => {},
-  });
-
   const handleProductDelete = (productId) => () => {
-    setRemoveProductDialog({
-      open: false,
-      text: '',
-      onConfirm: () => {},
-    });
+    closeDialog();
+
     deleteProduct(productId);
   };
 
@@ -147,8 +139,7 @@ const ProductCard = ({ product }) => {
                   </Button>
                   <Button
                     onClick={() => {
-                      setRemoveProductDialog({
-                        open: true,
+                      openDialog({
                         text: 'Are you sure you want to delete this product?',
                         onConfirm: handleProductDelete(_id),
                       });
@@ -195,11 +186,6 @@ const ProductCard = ({ product }) => {
           )}
         </CardActions>
       </Card>
-
-      <ConfirmDialog
-        dialogConfig={removeProductDialog}
-        setDialogConfig={setRemoveProductDialog}
-      />
     </>
   );
 };
