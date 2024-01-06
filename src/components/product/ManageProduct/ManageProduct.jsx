@@ -50,11 +50,13 @@ const ManageProduct = () => {
 
   const selectedCategoryId = watch('category');
 
-  const { data: categories = [] } = useGetCategoriesQuery();
-  const { data: selectedCategorySubcategories = [] } =
-    useGetCategorySubcategoriesQuery(selectedCategoryId, {
-      skip: !selectedCategoryId,
-    });
+  const { data } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
+  const { data: categorySubcategoriesData } = useGetCategorySubcategoriesQuery(
+    selectedCategoryId,
+    { skip: !selectedCategoryId }
+  );
+  const categorySubcategories = categorySubcategoriesData?.subcategories || [];
   const { data: product } = useGetProductQuery(productId, { skip: !productId });
 
   useEffect(() => {
@@ -197,7 +199,7 @@ const ManageProduct = () => {
             <SelectDropdownMultichipAdapter
               name='subcategories'
               label='Subcategory'
-              options={selectedCategorySubcategories}
+              options={categorySubcategories}
             />
           </Box>
 

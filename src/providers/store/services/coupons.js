@@ -37,8 +37,8 @@ export const couponsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (_product, _err, id) => {
-        return [{ type: 'Coupons', id }];
+      invalidatesTags: (_result, _error, payload) => {
+        return [{ type: 'Coupons', id: payload }];
       },
     }),
   }),

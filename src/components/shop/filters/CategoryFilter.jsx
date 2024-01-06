@@ -17,7 +17,8 @@ const CategoryFilter = () => {
 
   const selectedCategories = useSelector(selectCategoriesFilter);
 
-  const { data: categories = [] } = useGetCategoriesQuery();
+  const { data } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
 
   return (
     <FilterListItem title='Category' icon={<CategoryIcon fontSize='small' />}>

@@ -13,15 +13,15 @@ import {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
-} from '../../../providers/store/services/categories';
-import { useDispatch } from '../../../providers/store/store';
-import { showNotification } from '../../../providers/store/features/notification/notificationSlice';
-import FormProvider from '../../../providers/form/FormProvider';
-import { useForm } from '../../../providers/form/hooks/useForm';
-import TextFieldAdapter from '../../../providers/form/formFields/TextFieldAdapter';
-import ConfirmDialog from '../../common/dialogs/ConfirmDialog/ConfirmDialog';
-import { formConfig } from './form-schema';
-import { useIsApiRequestPending } from '../../../hooks/useIsApiRequestPending';
+} from '../../providers/store/services/categories';
+import { useDispatch } from '../../providers/store/store';
+import { showNotification } from '../../providers/store/features/notification/notificationSlice';
+import FormProvider from '../../providers/form/FormProvider';
+import { useForm } from '../../providers/form/hooks/useForm';
+import TextFieldAdapter from '../../providers/form/formFields/TextFieldAdapter';
+import { useIsApiRequestPending } from '../../hooks/useIsApiRequestPending';
+import ConfirmDialog from '../common/dialogs/ConfirmDialog/ConfirmDialog';
+import { formConfig } from './manageCategoryForm.schema';
 
 const ManageCategory = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,9 @@ const ManageCategory = () => {
   });
   const [filterCategoryText, setFilterCategoryText] = useState('');
 
-  const { data: categories = [] } = useGetCategoriesQuery();
+  const { data } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
+
   const [createCategory] = useCreateCategoryMutation();
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
@@ -133,7 +135,7 @@ const ManageCategory = () => {
       </Box>
 
       <Paper sx={{ display: 'flex', flexWrap: 'wrap', padding: 1 }}>
-        {categories.length ? (
+        {categories.length > 0 ? (
           categories
             .filter(({ name }) =>
               name.toLowerCase().includes(filterCategoryText.toLowerCase())

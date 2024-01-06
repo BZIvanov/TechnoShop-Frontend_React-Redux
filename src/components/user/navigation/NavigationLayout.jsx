@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import SidebarMenu from '../navigation/SidebarMenu/SidebarMenu';
+import SidebarMenu from './SidebarMenu';
 
 const NavigationLayout = () => {
   return (

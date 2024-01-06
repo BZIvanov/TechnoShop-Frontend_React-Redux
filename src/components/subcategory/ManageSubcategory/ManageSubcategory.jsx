@@ -36,7 +36,8 @@ const ManageSubcategory = () => {
   });
   const [filterSubcategoryText, setFilterSubcategoryText] = useState('');
 
-  const { data: categories = [] } = useGetCategoriesQuery();
+  const { data } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
   const { data: subcategories = [] } = useGetSubcategoriesQuery();
   const [createSubcategory] = useCreateSubcategoryMutation();
   const [updateSubcategory] = useUpdateSubcategoryMutation();

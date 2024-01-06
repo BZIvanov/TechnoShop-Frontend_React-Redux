@@ -1,7 +1,7 @@
 import MenuList from '@mui/material/MenuList';
 
-import { useSelector } from '../../../../providers/store/store';
-import { selectUser } from '../../../../providers/store/features/user/userSlice';
+import { useSelector } from '../../../providers/store/store';
+import { selectUser } from '../../../providers/store/features/user/userSlice';
 import {
   AutoAwesomeMosaicIcon,
   CategoryIcon,
@@ -11,8 +11,8 @@ import {
   ListAltIcon,
   PasswordIcon,
   PhoneAndroidIcon,
-} from '../../../mui/Icons';
-import SidebarMenuLink from '../SidebarMenuLink/SidebarMenuLink';
+} from '../../mui/Icons';
+import SidebarMenuLink from './SidebarMenuLink';
 
 const userLinks = [
   {

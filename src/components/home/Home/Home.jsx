@@ -6,7 +6,8 @@ import ProductsSection from '../ProductsSection/ProductsSection';
 import { TYPEWRITER_TEXTS } from '../constants';
 
 const Home = () => {
-  const { data: categories } = useGetCategoriesQuery();
+  const { data } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
   const { data: subcategories } = useGetSubcategoriesQuery();
 
   return (

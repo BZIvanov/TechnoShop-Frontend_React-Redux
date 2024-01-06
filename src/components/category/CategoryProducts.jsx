@@ -5,19 +5,22 @@ import Box from '@mui/material/Box';
 import {
   useGetCategoryQuery,
   useGetCategoryProductsQuery,
-} from '../../../providers/store/services/categories';
-import ProductsList from '../../product/ProductsList/ProductsList';
+} from '../../providers/store/services/categories';
+import ProductsList from '../product/ProductsList/ProductsList';
 
 const CategoryProducts = () => {
   const [page, setPage] = useState(1);
 
   const { categoryId } = useParams();
 
-  const { data: category } = useGetCategoryQuery(categoryId);
+  const { data: categoryData } = useGetCategoryQuery(categoryId);
+  const category = categoryData?.category;
   const { data: categoryProductsData } = useGetCategoryProductsQuery({
     id: categoryId,
     page,
   });
+  const categoryProducts = categoryProductsData?.products;
+  const categoryProductsTotalCount = categoryProductsData?.totalCount;
 
   const handlePageChange = (_, value) => {
     setPage(value);
@@ -25,13 +28,13 @@ const CategoryProducts = () => {
 
   return (
     <Box>
-      {category && categoryProductsData && (
+      {category && (
         <ProductsList
-          header={`${categoryProductsData.totalCount} products in ${category.name} category`}
-          products={categoryProductsData.products}
+          header={`${categoryProductsTotalCount} products in ${category.name} category`}
+          products={categoryProducts}
           page={page}
           handlePageChange={handlePageChange}
-          totalCount={categoryProductsData.totalCount}
+          totalCount={categoryProductsTotalCount}
           productsPerPage={12}
         />
       )}
