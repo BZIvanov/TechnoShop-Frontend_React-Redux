@@ -17,7 +17,8 @@ const SubcategoryFilter = () => {
 
   const selectedSubcategories = useSelector(selectSubcategoriesFilter);
 
-  const { data: subcategories = [] } = useGetSubcategoriesQuery();
+  const { data: subcategoriesData } = useGetSubcategoriesQuery();
+  const subcategories = subcategoriesData?.subcategories || [];
 
   return (
     <FilterListItem

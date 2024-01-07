@@ -28,7 +28,7 @@ const CategoryProducts = () => {
 
   return (
     <Box>
-      {category && (
+      {category && categoryProductsData && (
         <ProductsList
           header={`${categoryProductsTotalCount} products in ${category.name} category`}
           products={categoryProducts}

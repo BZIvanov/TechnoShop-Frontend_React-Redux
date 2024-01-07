@@ -13,13 +13,13 @@ import OrdersList from '../../components/order/OrdersList/OrdersList';
 import WishList from '../../components/wishlist/WishList';
 import PasswordUpdateForm from '../../components/user/auth/PasswordUpdateForm';
 import ManageCategory from '../../components/category/ManageCategory';
-import ManageSubcategory from '../../components/subcategory/ManageSubcategory/ManageSubcategory';
+import ManageSubcategory from '../../components/subcategory/ManageSubcategory';
 import ManageProduct from '../../components/product/ManageProduct/ManageProduct';
 import Products from '../../components/product/Products/Products';
 import ProductDetails from '../../components/product/ProductDetails/ProductDetails';
 import ManageCoupon from '../../components/coupon/ManageCoupon';
 import CategoryProducts from '../../components/category/CategoryProducts';
-import SubcategoryProducts from '../../components/subcategory/SubcategoryProducts/SubcategoryProducts';
+import SubcategoryProducts from '../../components/subcategory/SubcategoryProducts';
 import Checkout from '../../components/checkout/Checkout';
 
 const AppRoutes = () => {

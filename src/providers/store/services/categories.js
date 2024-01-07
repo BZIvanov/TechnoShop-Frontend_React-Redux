@@ -67,7 +67,10 @@ export const categoriesApi = api.injectEndpoints({
         };
       },
       invalidatesTags: (_result, _error, payload) => {
-        return [{ type: 'Categories', id: payload }];
+        return [
+          { type: 'Categories', id: payload },
+          { type: 'Subcategories', id: 'LIST' },
+        ];
       },
     }),
     getCategorySubcategories: build.query({
