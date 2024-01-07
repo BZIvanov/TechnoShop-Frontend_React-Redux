@@ -24,6 +24,7 @@ import {
   useDeleteCouponMutation,
 } from '../../providers/store/services/coupons';
 import { useConfirmDialog } from '../../contexts/useConfirmDialogContext';
+import { useIsApiRequestPending } from '../../hooks/useIsApiRequestPending';
 import { DeleteIcon } from '../mui/Icons';
 import { formConfig } from './manageCouponForm.schema';
 
@@ -54,8 +55,7 @@ const ManageCoupon = () => {
     deleteCoupon(couponId);
   };
 
-  // TODO
-  const loading = false;
+  const isApiLoading = useIsApiRequestPending();
 
   return (
     <Box sx={{ padding: (theme) => theme.spacing(1) }}>
@@ -88,7 +88,7 @@ const ManageCoupon = () => {
           <Button
             variant='contained'
             type='submit'
-            disabled={formState.isSubmitting || loading}
+            disabled={formState.isSubmitting || isApiLoading}
           >
             Create Coupon
           </Button>

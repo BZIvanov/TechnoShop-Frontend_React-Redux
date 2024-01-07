@@ -19,6 +19,7 @@ import {
   selectCartProductById,
 } from '../../../providers/store/features/cart/cartSlice';
 import { useConfirmDialog } from '../../../contexts/useConfirmDialogContext';
+import { useIsApiRequestPending } from '../../../hooks/useIsApiRequestPending';
 import AverageRating from '../../common/rating/AverageRating/AverageRating';
 import {
   EditIcon,
@@ -51,15 +52,14 @@ const ProductCard = ({ product }) => {
     deleteProduct(productId);
   };
 
-  // TODO
-  const loading = false;
+  const isApiLoading = useIsApiRequestPending();
 
   return (
     <>
       <AverageRating ratings={ratings} size='small' />
       <Card>
         <CardActionArea onClick={() => navigate(`/product/${_id}`)}>
-          {loading ? (
+          {isApiLoading ? (
             <Skeleton
               sx={{ height: 140 }}
               animation='wave'
@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
             />
           )}
           <CardContent sx={{ paddingBlock: '8px' }}>
-            {loading ? (
+            {isApiLoading ? (
               <>
                 <Skeleton
                   animation='wave'
@@ -110,7 +110,7 @@ const ProductCard = ({ product }) => {
         </CardActionArea>
 
         <CardActions>
-          {loading ? (
+          {isApiLoading ? (
             <>
               <Skeleton
                 animation='wave'

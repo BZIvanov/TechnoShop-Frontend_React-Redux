@@ -159,55 +159,35 @@ const ManageProduct = () => {
 
       <Box sx={{ width: '99%' }}>
         <FormProvider onSubmit={handleProductSubmit} methods={formMethods}>
-          <Box my={1}>
-            <TextFieldAdapter name='title' label='Title' />
-          </Box>
-          <Box my={1}>
-            <TextFieldAdapter name='description' label='Description' />
-          </Box>
-          <Box my={1}>
-            <TextFieldAdapter name='price' label='Price' type='number' />
-          </Box>
-          <Box my={1}>
-            <SelectDropdownAdapter
-              name='shipping'
-              label='Shipping'
-              options={['Yes', 'No']}
-            />
-          </Box>
-          <Box my={1}>
-            <TextFieldAdapter name='quantity' label='Quantity' type='number' />
-          </Box>
-          <Box my={1}>
-            <TextFieldAdapter name='color' label='Color' />
-          </Box>
-          <Box my={1}>
-            <TextFieldAdapter name='brand' label='Brand' />
-          </Box>
-          <Box my={1}>
-            <SelectDropdownAdapter
-              name='category'
-              label='Category'
-              options={categories}
-              extendedOnChange={() => {
-                // reset subcategories whenever category is changed
-                setValue('subcategories', []);
-              }}
-            />
-          </Box>
-          <Box>
-            <SelectDropdownMultichipAdapter
-              name='subcategories'
-              label='Subcategory'
-              options={categorySubcategories}
-            />
-          </Box>
+          <TextFieldAdapter name='title' label='Title' />
+          <TextFieldAdapter name='description' label='Description' />
+          <TextFieldAdapter name='price' label='Price' type='number' />
+          <SelectDropdownAdapter
+            name='shipping'
+            label='Shipping'
+            options={['Yes', 'No']}
+          />
+          <TextFieldAdapter name='quantity' label='Quantity' type='number' />
+          <TextFieldAdapter name='color' label='Color' />
+          <TextFieldAdapter name='brand' label='Brand' />
+          <SelectDropdownAdapter
+            name='category'
+            label='Category'
+            options={categories}
+            extendedOnChange={() => {
+              // reset subcategories whenever category is changed
+              setValue('subcategories', []);
+            }}
+          />
+          <SelectDropdownMultichipAdapter
+            name='subcategories'
+            label='Subcategory'
+            options={categorySubcategories}
+          />
 
           <Divider sx={{ margin: '8px 0' }} />
 
-          <Box>
-            <ImagesFieldAdapter name='images' />
-          </Box>
+          <ImagesFieldAdapter name='images' />
 
           <Stack sx={{ marginTop: 3 }} spacing={2} direction='row'>
             {/* Newly uploaded images */}

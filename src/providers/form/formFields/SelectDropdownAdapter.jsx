@@ -31,7 +31,7 @@ const SelectDropdownAdapter = ({
 
         return (
           <FormControl
-            sx={{ width: '100%' }}
+            sx={{ width: '100%', marginBlock: 1 }}
             variant='standard'
             error={Boolean(fieldState.error)}
             disabled={isDisabled}
