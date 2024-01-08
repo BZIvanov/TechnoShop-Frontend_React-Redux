@@ -9,7 +9,7 @@ import {
   selectBrandsFilter,
   changeFilter,
 } from '../../../providers/store/features/productsFilters/productsFiltersSlice';
-import FilterListItem from '../FilterListItem/FilterListItem';
+import FilterListItem from './FilterListItem';
 import { TokenIcon } from '../../mui/Icons';
 
 const BrandsFilter = () => {

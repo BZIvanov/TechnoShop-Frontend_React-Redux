@@ -6,7 +6,7 @@ import {
   selectRatingFilter,
   changeFilter,
 } from '../../../providers/store/features/productsFilters/productsFiltersSlice';
-import FilterListItem from '../FilterListItem/FilterListItem';
+import FilterListItem from './FilterListItem';
 import { StarIcon } from '../../mui/Icons';
 import { MAX_RATING_VALUE } from '../../common/rating/constants';
 

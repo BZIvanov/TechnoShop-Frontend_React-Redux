@@ -9,7 +9,7 @@ import {
   selectSubcategoriesFilter,
   changeFilter,
 } from '../../../providers/store/features/productsFilters/productsFiltersSlice';
-import FilterListItem from '../FilterListItem/FilterListItem';
+import FilterListItem from './FilterListItem';
 import { AutoAwesomeMosaicIcon } from '../../mui/Icons';
 
 const SubcategoryFilter = () => {

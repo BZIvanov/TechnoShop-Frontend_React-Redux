@@ -9,7 +9,7 @@ import {
   selectCategoriesFilter,
   changeFilter,
 } from '../../../providers/store/features/productsFilters/productsFiltersSlice';
-import FilterListItem from '../FilterListItem/FilterListItem';
+import FilterListItem from './FilterListItem';
 import { CategoryIcon } from '../../mui/Icons';
 
 const CategoryFilter = () => {

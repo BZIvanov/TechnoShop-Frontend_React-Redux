@@ -6,7 +6,7 @@ import {
   useGetSubcategoryQuery,
   useGetSubcategoryProductsQuery,
 } from '../../providers/store/services/subcategories';
-import ProductsList from '../product/ProductsList/ProductsList';
+import ProductsList from '../product/ProductsList';
 
 const SubcategoryProducts = () => {
   const [page, setPage] = useState(1);
