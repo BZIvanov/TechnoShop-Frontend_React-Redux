@@ -39,10 +39,8 @@ const ManageProduct = () => {
   const [newImages, setNewImages] = useState([]);
   const [existingImages, setExistingImages] = useState([]); // we will have these, when editing a product
 
-  const [createProduct, { isSuccess: isCreateProductSuccess }] =
-    useCreateProductMutation();
-  const [updateProduct, { isSuccess: isUpdateProductSuccess }] =
-    useUpdateProductMutation();
+  const [createProduct] = useCreateProductMutation();
+  const [updateProduct] = useUpdateProductMutation();
   const [uploadImage] = useUploadImageMutation();
 
   const formMethods = useForm(formConfig);
@@ -82,15 +80,17 @@ const ManageProduct = () => {
   }, [setValue, reset, productId, product]);
 
   const handleProductSubmit = async (values) => {
+    const formImages = [...values.images];
+
     const resizedImageFiles = await Promise.all(
-      values.images.map((image) => resizeImage(image))
+      formImages.map((image) => resizeImage(image))
     );
     const imagePromises = resizedImageFiles.map((image) => {
       return uploadImage({ image });
     });
     const uploadedImagesData = await Promise.allSettled(imagePromises);
     // replace the values images with the response for each uploaded image, which is what will be stored in the database
-    values.images = uploadedImagesData
+    const uploadedImages = uploadedImagesData
       .filter((uploadedImage) => {
         return uploadedImage.status === 'fulfilled';
       })
@@ -104,14 +104,22 @@ const ManageProduct = () => {
     let result;
     if (productId) {
       // concat the previous images with the new uploads, because when editing we can upload even more images
-      values.images = values.images.concat(existingImages);
+      const allImages = uploadedImages.concat(existingImages);
 
-      result = await updateProduct({ id: productId, ...values });
+      result = await updateProduct({
+        id: productId,
+        ...values,
+        images: allImages,
+      });
     } else {
-      result = await createProduct(values);
+      result = await createProduct({ ...values, images: uploadedImages });
     }
 
     if (!('error' in result)) {
+      reset();
+      setNewImages([]);
+      setExistingImages([]);
+
       dispatch(
         showNotification({
           type: 'success',
@@ -120,17 +128,6 @@ const ManageProduct = () => {
       );
     }
   };
-
-  useEffect(() => {
-    // reset the form if the product was successfully created or updated
-    if (isCreateProductSuccess || isUpdateProductSuccess) {
-      setExistingImages([]);
-    }
-
-    if (isCreateProductSuccess) {
-      reset();
-    }
-  }, [reset, isCreateProductSuccess, isUpdateProductSuccess]);
 
   const selectedFormImages = watch('images');
   useEffect(() => {
