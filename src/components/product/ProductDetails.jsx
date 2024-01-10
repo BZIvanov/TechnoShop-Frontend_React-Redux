@@ -48,7 +48,8 @@ const ProductDetails = () => {
   const user = useSelector(selectUser);
   const cartProduct = useSelector(selectCartProductById(productId));
 
-  const { data: product } = useGetProductQuery(productId);
+  const { data: productData } = useGetProductQuery(productId);
+  const product = productData?.product;
   const { data: similarProductsData } = useGetSimilarProductsQuery(productId);
 
   const [rateProduct] = useRateProductMutation();

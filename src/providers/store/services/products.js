@@ -11,10 +11,8 @@ export const productsApi = api.injectEndpoints({
         };
       },
       providesTags: (result) => {
-        const products = result?.products || [];
-
         return [
-          ...products.map(({ _id }) => ({ type: 'Products', id: _id })),
+          ...result.products.map(({ _id }) => ({ type: 'Products', id: _id })),
           { type: 'Products', id: 'LIST' },
         ];
       },
@@ -41,9 +39,8 @@ export const productsApi = api.injectEndpoints({
         url: `/products/${id}`,
         method: 'GET',
       }),
-      transformResponse: (response) => response.product,
-      providesTags: (_product, _err, id) => {
-        return [{ type: 'Products', id }];
+      providesTags: (_result, _error, payload) => {
+        return [{ type: 'Products', id: payload }];
       },
     }),
     createProduct: build.mutation({
@@ -53,7 +50,9 @@ export const productsApi = api.injectEndpoints({
         body: data,
         credentials: 'include',
       }),
-      invalidatesTags: [{ type: 'Products', id: 'LIST' }],
+      invalidatesTags: () => {
+        [{ type: 'Products', id: 'LIST' }];
+      },
     }),
     updateProduct: build.mutation({
       query: (data) => {
@@ -66,8 +65,8 @@ export const productsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (product) => {
-        return [{ type: 'Products', id: product?._id }];
+      invalidatesTags: (_result, _error, payload) => {
+        return [{ type: 'Products', id: payload.id }];
       },
     }),
     deleteProduct: build.mutation({
@@ -78,8 +77,8 @@ export const productsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (_product, _err, id) => {
-        return [{ type: 'Products', id }];
+      invalidatesTags: (_result, _error, payload) => {
+        return [{ type: 'Products', id: payload }];
       },
     }),
     rateProduct: build.mutation({
@@ -93,9 +92,8 @@ export const productsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      transformResponse: (response) => response.product,
-      invalidatesTags: (product) => {
-        return [{ type: 'Products', id: product?._id }];
+      invalidatesTags: (_result, _error, payload) => {
+        return [{ type: 'Products', id: payload.id }];
       },
     }),
     getProductsBrands: build.query({
