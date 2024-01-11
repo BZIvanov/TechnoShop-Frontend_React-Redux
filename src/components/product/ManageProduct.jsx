@@ -55,7 +55,10 @@ const ManageProduct = () => {
     { skip: !selectedCategoryId }
   );
   const categorySubcategories = categorySubcategoriesData?.subcategories || [];
-  const { data: product } = useGetProductQuery(productId, { skip: !productId });
+  const { data: productData } = useGetProductQuery(productId, {
+    skip: !productId,
+  });
+  const product = productData?.product;
 
   useEffect(() => {
     if (productId && product) {

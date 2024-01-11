@@ -40,7 +40,7 @@ const RatingDialog = ({
           type='submit'
           onClick={() => {
             setShowRatingModal(false);
-            rateProduct();
+            rateProduct(rating);
           }}
         >
           Rate

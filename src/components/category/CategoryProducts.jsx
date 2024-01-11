@@ -30,7 +30,7 @@ const CategoryProducts = () => {
     <Box>
       {category && categoryProductsData && (
         <ProductsList
-          header={`${categoryProductsTotalCount} products in ${category.name} category`}
+          header={`${category.name} category`}
           products={categoryProducts}
           page={page}
           handlePageChange={handlePageChange}

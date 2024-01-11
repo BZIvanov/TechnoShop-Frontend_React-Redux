@@ -16,7 +16,7 @@ import ManageCategory from '../../components/category/ManageCategory';
 import ManageSubcategory from '../../components/subcategory/ManageSubcategory';
 import ManageProduct from '../../components/product/ManageProduct';
 import Products from '../../components/product/Products';
-import ProductDetails from '../../components/product/ProductDetails';
+import ProductDetailed from '../../components/product/detailed/ProductDetailed';
 import ManageCoupon from '../../components/coupon/ManageCoupon';
 import CategoryProducts from '../../components/category/CategoryProducts';
 import SubcategoryProducts from '../../components/subcategory/SubcategoryProducts';
@@ -85,7 +85,7 @@ const AppRoutes = () => {
         <Route path='coupon' element={<ManageCoupon />} />
         <Route path='password' element={<PasswordUpdateForm />} />
       </Route>
-      <Route path='/product/:productId' element={<ProductDetails />} />
+      <Route path='/product/:productId' element={<ProductDetailed />} />
       <Route path='/category/:categoryId' element={<CategoryProducts />} />
       <Route
         path='/subcategory/:subcategoryId'

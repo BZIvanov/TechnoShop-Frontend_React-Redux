@@ -6,7 +6,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-const ProductInfoTabs = ({ description }) => {
+const InfoTabs = ({ description }) => {
   const [tabValue, setTabValue] = useState('0');
 
   return (
@@ -29,8 +29,8 @@ const ProductInfoTabs = ({ description }) => {
   );
 };
 
-ProductInfoTabs.propTypes = {
+InfoTabs.propTypes = {
   description: PropTypes.string,
 };
 
-export default ProductInfoTabs;
+export default InfoTabs;
