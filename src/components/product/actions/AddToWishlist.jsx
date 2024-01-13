@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { useSelector } from '../../../../providers/store/store';
-import { selectUser } from '../../../../providers/store/features/user/userSlice';
-import { FavoriteIcon } from '../../../mui/Icons';
+import { useSelector } from '../../../providers/store/store';
+import { selectUser } from '../../../providers/store/features/user/userSlice';
+import { FavoriteBorderIcon } from '../../mui/Icons';
 
 const AddToWishlist = ({ productId, onAddToWishlist }) => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const AddToWishlist = ({ productId, onAddToWishlist }) => {
       }}
       sx={{ display: 'flex', flexDirection: 'column' }}
     >
-      <FavoriteIcon />
+      <FavoriteBorderIcon />
       <Typography variant='caption'>Add to wishlist</Typography>
     </Button>
   );

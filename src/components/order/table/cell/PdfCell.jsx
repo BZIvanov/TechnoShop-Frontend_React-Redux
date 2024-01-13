@@ -54,6 +54,15 @@ const PdfCell = ({ order }) => {
           <Text style={styles.header}>Products</Text>
           {products.map((orderProduct) => {
             const { product, count } = orderProduct;
+
+            if (!product) {
+              return (
+                <View key={orderProduct._id}>
+                  <Text>No longer available product</Text>
+                </View>
+              );
+            }
+
             return (
               <View key={product._id} style={styles.product}>
                 <Text>Product name: {product.title}</Text>

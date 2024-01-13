@@ -163,6 +163,17 @@ const OrderTableRow = ({ order, isAdminCell }) => {
                 >
                   {products.map((orderProduct) => {
                     const { product, count } = orderProduct;
+
+                    if (!product) {
+                      return (
+                        <TableRow key={orderProduct._id}>
+                          <TableCell colSpan={4} align='center'>
+                            <em>No longer available product</em>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    }
+
                     return (
                       <TableRow key={product._id}>
                         <TableCell align='center'>{product.title}</TableCell>

@@ -5,7 +5,7 @@ import ProductsList from './ProductsList';
 
 const PRODUCTS_PER_PAGE = 12;
 
-const Products = () => {
+const ManageProducts = () => {
   const [page, setPage] = useState(1);
 
   const handlePageChange = (_, value) => setPage(value);
@@ -24,4 +24,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ManageProducts;

@@ -20,6 +20,7 @@ import {
   ExpandMore,
   Face,
   Favorite,
+  FavoriteBorder,
   Gradient,
   Home,
   KeyboardArrowDown,
@@ -62,6 +63,7 @@ export const ExpandLessIcon = (props) => <ExpandLess {...props} />;
 export const ExpandMoreIcon = (props) => <ExpandMore {...props} />;
 export const FaceIcon = (props) => <Face {...props} />;
 export const FavoriteIcon = (props) => <Favorite {...props} />;
+export const FavoriteBorderIcon = (props) => <FavoriteBorder {...props} />;
 export const GradientIcon = (props) => <Gradient {...props} />;
 export const HomeIcon = (props) => <Home {...props} />;
 export const KeyboardArrowDownIcon = (props) => (

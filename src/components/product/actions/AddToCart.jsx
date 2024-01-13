@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { useSelector } from '../../../../providers/store/store';
-import { selectCartProductById } from '../../../../providers/store/features/cart/cartSlice';
-import { AddShoppingCartIcon } from '../../../mui/Icons';
+import { useSelector } from '../../../providers/store/store';
+import { selectCartProductById } from '../../../providers/store/features/cart/cartSlice';
+import { AddShoppingCartIcon } from '../../mui/Icons';
 
 const AddToCart = ({ productId, onAddToCart, productQuantity }) => {
   const cartProduct = useSelector(selectCartProductById(productId));

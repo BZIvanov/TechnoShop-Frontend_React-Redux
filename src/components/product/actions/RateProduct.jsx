@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { useSelector } from '../../../../providers/store/store';
-import { selectUser } from '../../../../providers/store/features/user/userSlice';
-import RatingDialog from '../../../common/dialogs/RatingDialog';
-import { StarIcon, StarBorderOutlinedIcon } from '../../../mui/Icons';
+import { useSelector } from '../../../providers/store/store';
+import { selectUser } from '../../../providers/store/features/user/userSlice';
+import RatingDialog from '../../common/dialogs/RatingDialog';
+import { StarIcon, StarBorderOutlinedIcon } from '../../mui/Icons';
 
 const RateProduct = ({ productId, onRateProduct, productRatings }) => {
   const navigate = useNavigate();

@@ -41,22 +41,22 @@ const adminLinks = [
   {
     toLink: 'category',
     icon: <CategoryIcon fontSize='small' />,
-    linkText: 'Manage categories',
+    linkText: 'Manage Categories',
   },
   {
     toLink: 'subcategory',
     icon: <AutoAwesomeMosaicIcon fontSize='small' />,
-    linkText: 'Manage subcategories',
+    linkText: 'Manage Subcategories',
   },
   {
     toLink: 'product',
     icon: <GradientIcon fontSize='small' />,
-    linkText: 'Manage products',
+    linkText: 'Manage Product',
   },
   {
-    toLink: 'products-list',
+    toLink: 'products',
     icon: <PhoneAndroidIcon fontSize='small' />,
-    linkText: 'Products List',
+    linkText: 'Manage Products',
   },
   {
     toLink: 'coupon',

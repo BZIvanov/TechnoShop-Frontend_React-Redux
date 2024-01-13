@@ -25,9 +25,9 @@ import ImagesCarousel from '../../common/imagePreview/carousel/ImagesCarousel';
 import InfoTextListItem from './InfoTextListItem';
 import InfoChipsListItem from './InfoChipsListItem';
 import InfoTabs from './InfoTabs';
-import AddToCart from './actions/AddToCart';
-import AddToWishlist from './actions/AddToWishlist';
-import RateProduct from './actions/RateProduct';
+import AddToCart from '../actions/AddToCart';
+import AddToWishlist from '../actions/AddToWishlist';
+import RateProduct from '../actions/RateProduct';
 
 const ProductDetailed = () => {
   const navigate = useNavigate();
