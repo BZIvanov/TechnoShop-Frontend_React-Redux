@@ -12,10 +12,8 @@ export const wishlistsApi = api.injectEndpoints({
         };
       },
       providesTags: (result) => {
-        const products = result?.products || [];
-
         return [
-          ...products.map(({ _id }) => ({ type: 'Wishlists', id: _id })),
+          ...result.products.map(({ _id }) => ({ type: 'Wishlists', id: _id })),
           { type: 'Wishlists', id: 'LIST' },
         ];
       },
@@ -41,7 +39,7 @@ export const wishlistsApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (response, err, payload) => {
+      invalidatesTags: (_result, _error, payload) => {
         return [{ type: 'Wishlists', id: payload }];
       },
     }),

@@ -12,10 +12,8 @@ export const couponsApi = api.injectEndpoints({
         };
       },
       providesTags: (result) => {
-        const coupons = result?.coupons || [];
-
         return [
-          ...coupons.map(({ _id }) => ({ type: 'Coupons', id: _id })),
+          ...result.coupons.map(({ _id }) => ({ type: 'Coupons', id: _id })),
           { type: 'Coupons', id: 'LIST' },
         ];
       },
@@ -27,10 +25,12 @@ export const couponsApi = api.injectEndpoints({
         body: data,
         credentials: 'include',
       }),
-      invalidatesTags: [{ type: 'Coupons', id: 'LIST' }],
+      invalidatesTags: () => {
+        return [{ type: 'Coupons', id: 'LIST' }];
+      },
     }),
     deleteCoupon: build.mutation({
-      query(id) {
+      query: (id) => {
         return {
           url: `/coupons/${id}`,
           method: 'DELETE',

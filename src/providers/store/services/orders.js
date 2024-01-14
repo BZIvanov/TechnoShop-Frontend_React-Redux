@@ -12,10 +12,8 @@ export const ordersApi = api.injectEndpoints({
         };
       },
       providesTags: (result) => {
-        const orders = result?.orders || [];
-
         return [
-          ...orders.map(({ _id }) => ({ type: 'Orders', id: _id })),
+          ...result.orders.map(({ _id }) => ({ type: 'Orders', id: _id })),
           { type: 'Orders', id: 'LIST' },
         ];
       },
@@ -27,7 +25,9 @@ export const ordersApi = api.injectEndpoints({
         body: data,
         credentials: 'include',
       }),
-      invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
+      invalidatesTags: () => {
+        return [{ type: 'Orders', id: 'LIST' }];
+      },
     }),
     updateOrderStatus: build.mutation({
       query: (data) => {
@@ -40,7 +40,7 @@ export const ordersApi = api.injectEndpoints({
           credentials: 'include',
         };
       },
-      invalidatesTags: (response, err, payload) => {
+      invalidatesTags: (_result, _error, payload) => {
         return [{ type: 'Orders', id: payload.id }];
       },
     }),
